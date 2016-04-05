@@ -3,6 +3,8 @@
 from rapp_robot_api_audio import Audio
 from naoqi import ALProxy
 
+import time
+
 class NAOAudio(Audio):
 
     def __init__(self, parameters):
@@ -30,6 +32,17 @@ class NAOAudio(Audio):
         print "NAO start recording in file: " + str(filename)
         self.audio_rec.startMicrophonesRecording(filename, audio_type, \
                 samplerate, channels)
+
+    def record(self, \
+            filename, \
+            seconds, \
+            audio_type = 'ogg', \
+            samplerate = 16000, \
+            channels = [0,0,1,0]):
+        print "NAO records for " + str(seconds) + " seconds in file: " + filename
+        self.startRecording(filename, audio_type, samplerate, channels)
+        time.sleep(seconds)
+        self.stopRecording()
 
     def stopRecording(self):
         print "NAO stop recording"

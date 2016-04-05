@@ -8,7 +8,7 @@ class Audio:
   @abstractmethod
   def speak(self, text): pass
 
-  @abstractmethod
+  @abstractmethod 
   def startRecording(self, filename, audio_type, samplerate, channels): pass
 
   @abstractmethod
@@ -19,3 +19,7 @@ class Audio:
 
   @abstractmethod
   def setVolume(self, volume): pass
+  
+  @abstractmethod 
+  def record(self, filename, seconds, audio_type, samplerate, channels): pass
+
