@@ -2,7 +2,7 @@
 
 from abc import ABCMeta, abstractmethod
 
-class Interaction:
+class Audio:
   __metaclass__ = ABCMeta
 
   @abstractmethod

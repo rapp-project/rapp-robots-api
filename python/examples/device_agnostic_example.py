@@ -3,4 +3,4 @@
 from rapp_robot_api import RappRobot
 
 rh = RappRobot()
-rh.interaction.speak("Hello")
+rh.audio.speak("Hello")
