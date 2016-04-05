@@ -23,3 +23,6 @@ class Audio:
   @abstractmethod 
   def record(self, filename, seconds, audio_type, samplerate, channels): pass
 
+  @abstractmethod
+  def speechDetection(self, vocabulary, language): pass
+

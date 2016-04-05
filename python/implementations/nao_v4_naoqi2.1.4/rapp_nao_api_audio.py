@@ -18,6 +18,8 @@ class NAOAudio(Audio):
         self.audio_rec = ALProxy("ALAudioRecorder", self.nao_ip, self.nao_port)
         self.audio_player = ALProxy("ALAudioPlayer", self.nao_ip, self.nao_port)
         self.audio_device = ALProxy("ALAudioDevice", self.nao_ip, self.nao_port)
+        self.speech_recog = ALProxy("ALSpeechRecognition", self.nao_ip, self.nao_port)
+        self.memory = ALProxy("ALMemory", self.nao_ip, self.nao_port)
 
     def speak(self, text):
         print "NAO robot speaks: \"" + str(text) + "\""
@@ -56,4 +58,22 @@ class NAOAudio(Audio):
     def setVolume(self, volume):
         print "Setting NAO volume: " + str(volume) + "%"
         self.audio_device.setOutputVolume(volume)
+
+    def speechDetection(self, vocabulary, language = "English"):
+        print "Performing NAO speech detection in " + language + " and vocabulary = " +\
+                str(vocabulary)
+
+        self.speech_recog.setLanguage(language)
+        self.speech_recog.setVocabulary(vocabulary, False)
+
+        self.speech_recog.subscribe("rapp_speech_rec")
+        while self.memory.getData("WordRecognized")[0] == '':
+            time.sleep(0.1)
+
+        [word, probability] = self.memory.getData("WordRecognized")
+        self.speech_recog.unsubscribe("rapp_speech_rec")
+
+        return [word, probability]
+
+
 
