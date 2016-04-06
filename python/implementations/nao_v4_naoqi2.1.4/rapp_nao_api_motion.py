@@ -2,27 +2,40 @@
 
 from rapp_robot_api_motion import Motion
 
+from naoqi import ALProxy
+
 class DeviceMotion(Motion):
 
     def __init__(self, parameters):
-        pass
+        print "NAO motion initiated with parameters: " + str(parameters)
+
+        self.nao_ip = parameters["nao_ip"]
+        self.nao_port = int(parameters["nao_port"])
+
+        self.motion = ALProxy("ALMotion", self.nao_ip, self.nao_port)
 
     def enableMotors(self):
-        return [None, "Not implemented yet"]
-    
+        self.motion.stiffnessInterpolation('Body', 1.0, 0.5)
+        return [None, None]
+
     def disableMotors(self):
-        return [None, "Not implemented yet"]
+        self.motion.stiffnessInterpolation('Body', 0.0, 0.5)
+        return [None, None]
 
     def moveByVelocity(self, x_vel, y_vel, theta_vel):
-        return [None, "Not implemented yet"]
+        self.motion.moveToward(x_vel, y_vel, theta_vel)
+        return [None, None]
 
     def moveTo(self, x, y, theta):
-        return [None, "Not implemented yet"]
+        self.motion.moveTo(x, y, theta)
+        return [None, None]
 
     def stop(self):
-        return [None, "Not implemented yet"]
+        self.motion.stopMove()
+        return [None, None]
 
     def getVelocities(self):
-        return [None, "Not implemented yet"]
+        data = self.motion.getRobotVelocity()
+        return [data, None]
 
 

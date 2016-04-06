@@ -30,12 +30,12 @@ Then you can invoke any of the following robot-agnostic calls. Each of these cal
 | ```rh.motion.moveTo(x, y, theta)``` | The device moves from its current position to the relative pose [x,y,theta] |
 | ```rh.motion.stop()``` | Stops all motors activity |
 | ```rh.motion.getVelocities()``` | Returns the current robot velocities in m/sec (x_vel, y_vel, theta_vel) |
-| ```rh.humanoidMotion.setJointAngles(joints, angles, speed)``` | Sets a humanoid's joints in specific angles |
-| ```rh.humanoidMotion.getJointAngles(joints)``` | Returns the requested joints' angles for a humanoid robot |
-| ```rh.humanoidMotion.openHand(hand_name)``` | Opens a hand (name is [left, right]) |
-| ```rh.humanoidMotion.closeHand(hand_name)``` | Closes a hand (name is [left, right]) |
-| ```rh.humanoidMotion.goToPosture(posture, speed)``` | The humanoid goes to a predefined ```posture``` with the specific ```speed``` |
-| ```rh.humanoidMotion.getPosture()``` | Returns the humanoid's posture. If it exists in an arbitrary posture ```Unknown``` is returned |
+| ```rh.humanoid_motion.setJointAngles(joints, angles, speed)``` | Sets a humanoid's joints in specific angles |
+| ```rh.humanoid_motion.getJointAngles(joints)``` | Returns the requested joints' angles for a humanoid robot |
+| ```rh.humanoid_motion.openHand(hand_name)``` | Opens a hand (name is [left, right]) |
+| ```rh.humanoid_motion.closeHand(hand_name)``` | Closes a hand (name is [left, right]) |
+| ```rh.humanoid_motion.goToPosture(posture, speed)``` | The humanoid goes to a predefined ```posture``` with the specific ```speed``` |
+| ```rh.humanoid_motion.getPosture()``` | Returns the humanoid's posture. If it exists in an arbitrary posture ```Unknown``` is returned |
 | ```rh.vision.detectBlob(color_rgb, threshold, min_size, shape, wait)``` | Detects a blob of color ```color_rgb``` denoted as [r,g,b] ranging between [0,255], with a ```threshold``` ranging from [0,255], having ```min_size``` pixels, or a predefined ```shape``` ([Circle, Unknown]). The call waits for events ```wait``` seconds |
 | ```rh.vision.detectDarkness(threshold, wait)``` | Detects the existence of darkness, provided a threshold between [0,100]. The call waits for events ```wait``` seconds |
 | ```rh.vision.detectMovement(sensitivity, wait)``` | Detects the existence of darkness, provided a sensitivity between [0.0,1.0]. The call waits for events ```wait``` seconds |
