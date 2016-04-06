@@ -13,12 +13,15 @@ class DeviceHumanoidMotion(HumanoidMotion):
         self.nao_port = int(parameters["nao_port"])
 
         self.posture = ALProxy("ALRobotPosture", self.nao_ip, self.nao_port)
+        self.motion = ALProxy("ALMotion", self.nao_ip, self.nao_port)
 
     def setJointAngles(self, joints, angles, speed):
-        return [None, "Not implemented yet"]
+        self.motion.setAngles(joints, angles, speed)
+        return [None, None]
 
     def getJointAngles(self, joints):
-        return [None, "Not implemented yet"]
+        data = self.motion.getAngles(joints) # Not tested
+        return [data, None]
 
     def openHand(self, hand_name):
         return [None, "Not implemented yet"]
@@ -30,7 +33,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
         if posture not in ["Crouch", "LyingBack", "LyingBelly", "Sit", "SitRelax",\
                 "Stand", "StandInit", "StandZero"]:
             return [None, "Not supported posture"]
-        
+
         if speed <= 0.0 or speed > 1.0:
             return [None, "Speed out of bounds"]
 

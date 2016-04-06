@@ -17,4 +17,6 @@ rh.motion.stop()
 time.sleep(1)
 rh.humanoid_motion.goToPosture("Sit", 0.7)
 
+rh.humanoid_motion.setJointAngles(["HeadYaw", "HeadPitch"], [0.2, -0.2], 0.5)
+
 rh.motion.disableMotors()
