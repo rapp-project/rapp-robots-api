@@ -33,8 +33,3 @@ class Audio:
     def speechDetection(self, vocabulary, wait, language):
         raise NotImplementedError()
 
-    @abstractmethod
-    def voiceEmotionAnalysis(self, wait):
-        raise NotImplementedError()
-
-

@@ -87,5 +87,3 @@ class DeviceAudio(Audio):
 
         return [[word, probability], error]
 
-    def voiceEmotionAnalysis(self, wait):
-        return [None, "Not implemented yet"]

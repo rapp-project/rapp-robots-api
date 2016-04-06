@@ -28,5 +28,3 @@ class DeviceAudio(Audio):
     def speechDetection(self, vocabulary, wait, language):
         return [None, "Not implemented yet"]
 
-    def voiceEmotionAnalysis(self, wait):
-        return [None, "Not implemented yet"]

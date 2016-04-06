@@ -24,7 +24,6 @@ Then you can invoke any of the following robot-agnostic calls. Each of these cal
 | ```rh.audio.setVolume(volume)``` | Sets the device's maste output volume. ```volume``` must be between [0,100] |
 | ```rh.audio.record(filename, seconds, audio_type, samplerate, channels)``` | The device records to a ```filename```. The other parameters are the same as the ```startRecording``` call, but here the length in ```seconds``` must be specified |
 | ```rh.audio.speechDetection(vocabulary, wait, language)``` | Performs vocabulary-based speech detection. The ```vocabulary``` must be a list of words (or sentenses) in a specific ```language```, and the call waits ```wait``` seconds |
-| ```rh.voiceEmotionAnalysis(wait)``` | To be defined |
 | ```rh.motion.enableMotors()``` | Enables the device's motors (may not be needed in specific devices) |
 | ```rh.motion.disableMotors()``` | Disables the device's motors |
 | ```rh.motion.moveByVelocity(x_vel, y_vel, theta_vel)``` | Moves the device given the linear velocities by X,Y axis and the rotational (```theta_vel```)|
