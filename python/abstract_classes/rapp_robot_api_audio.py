@@ -3,26 +3,38 @@
 from abc import ABCMeta, abstractmethod
 
 class Audio:
-  __metaclass__ = ABCMeta
+    __metaclass__ = ABCMeta
 
-  @abstractmethod
-  def speak(self, text): pass
+    @abstractmethod
+    def speak(self, text): 
+        raise NotImplementedError()
 
-  @abstractmethod 
-  def startRecording(self, filename, audio_type, samplerate, channels): pass
+    @abstractmethod 
+    def startRecording(self, filename, audio_type, samplerate, channels): 
+        raise NotImplementedError()
 
-  @abstractmethod
-  def stopRecording(self): pass
+    @abstractmethod
+    def stopRecording(self):
+        raise NotImplementedError()
 
-  @abstractmethod
-  def playFile(self, filename): pass
+    @abstractmethod
+    def playFile(self, filename):
+        raise NotImplementedError()
 
-  @abstractmethod
-  def setVolume(self, volume): pass
-  
-  @abstractmethod 
-  def record(self, filename, seconds, audio_type, samplerate, channels): pass
+    @abstractmethod
+    def setVolume(self, volume):
+        raise NotImplementedError()
 
-  @abstractmethod
-  def speechDetection(self, vocabulary, language): pass
+    @abstractmethod 
+    def record(self, filename, seconds, audio_type, samplerate, channels):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def speechDetection(self, vocabulary, language, wait):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def voiceEmotionAnalysis(self, wait):
+        raise NotImplementedError()
+
 
