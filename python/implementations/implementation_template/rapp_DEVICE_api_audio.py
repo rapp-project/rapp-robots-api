@@ -25,7 +25,7 @@ class DeviceAudio(Audio):
     def record(self, filename, seconds, audio_type, samplerate, channels):
         return [None, "Not implemented yet"]
 
-    def speechDetection(self, vocabulary, language, wait):
+    def speechDetection(self, vocabulary, wait, language):
         return [None, "Not implemented yet"]
 
     def voiceEmotionAnalysis(self, wait):

@@ -9,8 +9,11 @@ from rapp_DEVICE_api_vision import DeviceVision
 # The upper class (namespace), containing per-functionality modules
 class RappRobot:
     def __init__(self):
-        self.audio = DeviceAudio()
-        self.motion = DeviceMotion()
-        self.sensors = DeviceSensors()
-        self.humanoid_motion = DeviceHumanoidMotion()
-        self.vision = DeviceVision()
+
+        self.parameters = {}
+
+        self.audio = DeviceAudio(self.arameters)
+        self.motion = DeviceMotion(self.parameters)
+        self.sensors = DeviceSensors(self.parameters)
+        self.humanoid_motion = DeviceHumanoidMotion(self.parameters)
+        self.vision = DeviceVision(self.parameters)

@@ -30,7 +30,7 @@ class Audio:
         raise NotImplementedError()
 
     @abstractmethod
-    def speechDetection(self, vocabulary, language, wait):
+    def speechDetection(self, vocabulary, wait, language):
         raise NotImplementedError()
 
     @abstractmethod

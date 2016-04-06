@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
-from rapp_robot_api_audio import Audio
+from rapp_robot_api_audio import DeviceAudio
+
 from naoqi import ALProxy
 
-import time
-
-class NAOAudio(Audio):
+class DeviceAudio(Audio):
 
     def __init__(self, parameters):
         print "NAO audio initiated with parameters: " + str(parameters)
@@ -21,9 +20,10 @@ class NAOAudio(Audio):
         self.speech_recog = ALProxy("ALSpeechRecognition", self.nao_ip, self.nao_port)
         self.memory = ALProxy("ALMemory", self.nao_ip, self.nao_port)
 
-    def speak(self, text):
+    def speak(self, text): 
         print "NAO robot speaks: \"" + str(text) + "\""
         self.tts.say(text)
+        return [None, None]
 
     # Audio type: wav or ogg
     def startRecording(self, \
@@ -34,6 +34,22 @@ class NAOAudio(Audio):
         print "NAO start recording in file: " + str(filename)
         self.audio_rec.startMicrophonesRecording(filename, audio_type, \
                 samplerate, channels)
+        return [None, None]
+
+    def stopRecording(self):
+        print "NAO stop recording"
+        self.audio_rec.stopMicrophonesRecording()
+        return [None, None]
+
+    def playFile(self, filename):
+        print "NAO to play file: " + str(filename)
+        self.audio_player.playFile(filename)
+        return [None, None]
+
+    def setVolume(self, volume):
+        print "Setting NAO volume: " + str(volume) + "%"
+        self.audio_device.setOutputVolume(volume)
+        return [None, None]
 
     def record(self, \
             filename, \
@@ -45,35 +61,29 @@ class NAOAudio(Audio):
         self.startRecording(filename, audio_type, samplerate, channels)
         time.sleep(seconds)
         self.stopRecording()
+        return [None, None]
 
-    def stopRecording(self):
-        print "NAO stop recording"
-        self.audio_rec.stopMicrophonesRecording()
-
-    def playFile(self, filename):
-        print "NAO to play file: " + str(filename)
-        self.audio_player.playFile(filename)
-
-    # Volume is between [0, 100]
-    def setVolume(self, volume):
-        print "Setting NAO volume: " + str(volume) + "%"
-        self.audio_device.setOutputVolume(volume)
-
-    def speechDetection(self, vocabulary, language = "English"):
-        print "Performing NAO speech detection in " + language + " and vocabulary = " +\
-                str(vocabulary)
+    def speechDetection(self, vocabulary, wait, language = "English"):
+        print "Performing NAO speech detection in " + language + \
+                " and vocabulary = " + str(vocabulary)
 
         self.speech_recog.setLanguage(language)
         self.speech_recog.setVocabulary(vocabulary, False)
 
         self.speech_recog.subscribe("rapp_speech_rec")
-        while self.memory.getData("WordRecognized")[0] == '':
+        iterations = wait / 0.1
+        while self.memory.getData("WordRecognized")[0] == '' and iterations > 0:
             time.sleep(0.1)
+            iterations -= 1
+
+        error = None
+        if iterations <= 0:
+            error = "Timeout without speech detection"
 
         [word, probability] = self.memory.getData("WordRecognized")
         self.speech_recog.unsubscribe("rapp_speech_rec")
 
-        return [word, probability]
+        return [[word, probability], Error]
 
-
-
+    def voiceEmotionAnalysis(self, wait):
+        return [None, "Not implemented yet"]
