@@ -2,13 +2,8 @@
 
 from abc import ABCMeta, abstractmethod
 
-from rapp_robot_api_humanoid_motion import HumanoidMotion
-
 class Motion:
     __metaclass__ = ABCMeta
-
-    def __init__(self):
-        self.humanoid = HumanoidMotion()
 
     @abstractmethod
     def enableMotors(self):
