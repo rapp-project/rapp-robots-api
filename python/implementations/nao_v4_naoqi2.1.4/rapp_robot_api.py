@@ -6,6 +6,8 @@ from rapp_nao_api_sensors import DeviceSensors
 from rapp_nao_api_humanoid_motion import DeviceHumanoidMotion
 from rapp_nao_api_vision import DeviceVision
 
+import os
+
 # The upper class (namespace), containing per-functionality modules
 class RappRobot:
     def __init__(self):
@@ -13,7 +15,9 @@ class RappRobot:
         self.parameters = {}
 
         self.configuration = []
-        with open("nao_connectivity") as f:
+
+        curr_path = os.path.dirname(os.path.realpath(__file__))
+        with open(curr_path + "/nao_connectivity") as f:
             self.configuration = f.readlines()
 
         # Per-device initialization to allow for flexibility

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-from rapp_robot_api_audio import DeviceAudio
+import time
+
+from rapp_robot_api_audio import Audio
 
 from naoqi import ALProxy
 
@@ -83,7 +85,7 @@ class DeviceAudio(Audio):
         [word, probability] = self.memory.getData("WordRecognized")
         self.speech_recog.unsubscribe("rapp_speech_rec")
 
-        return [[word, probability], Error]
+        return [[word, probability], error]
 
     def voiceEmotionAnalysis(self, wait):
         return [None, "Not implemented yet"]
