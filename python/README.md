@@ -1,10 +1,10 @@
 - [Setup](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#setup)
 - RAPP Python API calls
   - [Audio RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
-  - [Motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
-  - [Humanoid motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
-  - [Sensors RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
-  - [Vision RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+  - [Motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#motion-rapp-python-api-calls)
+  - [Humanoid motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audiohumanoid-motion-rapp-python-api-calls)
+  - [Sensors RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#sensors-rapp-python-api-calls)
+  - [Vision RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#vision-rapp-python-api-calls)
 - [Compatibility table](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#compatibility-table)
 
 #Setup
