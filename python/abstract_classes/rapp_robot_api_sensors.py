@@ -6,7 +6,7 @@ class Sensors:
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def getBatteryLevels(self, levels): 
+    def getBatteryLevels(self): 
         raise NotImplementedError()
 
     @abstractmethod
@@ -14,6 +14,6 @@ class Sensors:
         raise NotImplementedError()
 
     @abstractmethod
-    def getTactileMeasurements(self, wait): 
+    def getTactileMeasurements(self, wait, get_history): 
         raise NotImplementedError()
 

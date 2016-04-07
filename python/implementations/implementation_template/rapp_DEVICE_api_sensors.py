@@ -7,12 +7,12 @@ class DeviceSensors(Sensors):
     def __init__(self, parameters):
         pass
 
-    def getBatteryLevels(self, levels): 
+    def getBatteryLevels(self): 
         return [None, "Not implemented yet"]
 
     def getSonarsMeasurements(self): 
         return [None, "Not implemented yet"]
 
-    def getTactileMeasurements(self, wait): 
+    def getTactileMeasurements(self, wait, get_history): 
         return [None, "Not implemented yet"]
 
