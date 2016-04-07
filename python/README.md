@@ -1,3 +1,12 @@
+- [Setup](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#setup)
+- RAPP Python API calls
+  - [Audio RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+  - [Motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+  - [Humanoid motion RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+  - [Sensors RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+  - [Vision RAPP Python API calls](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#audio-rapp-python-api-calls)
+- [Compatibility table](https://github.com/rapp-project/rapp-robots-api/tree/python_api/python#compatibility-table)
+
 #Setup
 
 In any device for which you want to use the device-agnostic Python API, you must add the path of the ```abstract_classes``` folder and the implementation you want in ```PYTHONPATH```. For example for the NAO case:
@@ -364,5 +373,35 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Call Output**: ```[None, None]```
 
 **Expected Output**: The image must exist at "/home/nao/test.jpg"
+
+***
+
+#Compatibility table
+
+|API call | NAO v4 |
+| :--------: | :--------: |
+| rh.audio.speak | ✓ |
+| rh.audio.startRecording | ✓ |
+| rh.audio.stopRecording | ✓ |
+| rh.audio.playFile | ✓ |
+| rh.audio.setVolume | ✓ |
+| rh.audio.record | ✓ |
+| rh.audio.speechDetection | ✓ |
+| rh.motion.enableMotors | ✓ |
+| rh.motion.disableMotors | ✓ |
+| rh.motion.moveByVelocity | ✓ |
+| rh.motion.moveTo | ✓ |
+| rh.motion.stop | ✓ |
+| rh.humanoid_motion.getVelocities | ✓ |
+| rh.humanoid_motion.setJointAngles | ✓ |
+| rh.humanoid_motion.getJointAngles | ✓ |
+| rh.humanoid_motion.openHand | ✓ |
+| rh.humanoid_motion.closeHand | ✓ |
+| rh.humanoid_motion.goToPosture | ✓ |
+| rh.humanoid_motion.getPosture | ✓ |
+| rh.sensors.getBatteryLevels | ✓ |
+| rh.sensors.getSonarsMeasurements | ✓ |
+| rh.sensors.getTactileMeasurements | ✓ |
+| rh.vision.capturePhoto | ✓ |
 
 
