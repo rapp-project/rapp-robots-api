@@ -47,7 +47,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```channels```: Defines which microphones will be recorded. This is a list containing 0 by default and 1 at the microphones to be included as channels (e.g. [0,0,0,1]). This of course is device-specific, thus any API implementation must resolve the arbitrary input.
 
 **Example input**: ```rh.audio.startRecording("/home/device/test.ogg", "ogg", 16000, [0,0,1,0])```
+
 **Call Output**: ```[None,None]```
+
 **Expected Output**: The audio is captured using one microphone (thus the file contains one channel) and the file exists at ```/home/device/test.ogg```
 
 ***
@@ -63,7 +65,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```filename```: An *absolute* file path for the audio to be played
 
 **Example input**: ```rh.audio.playFile("/home/device/test.ogg")```
+
 **Call Output**: ```[None,None]```
+
 **Expected Output**: The device plays the ```/home/device/test.ogg``` file from the speakers
 ***
 
@@ -75,7 +79,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```volume```: The volume level which must be between [0,100]
 
 **Example input**: ```rh.audio.setVolume(50)```
+
 **Call Output**: ```[None,None]```
+
 **Expected Output**: Nothing interesting. The results will be apparent when NAO plays a file or speaks
 
 ***
@@ -92,7 +98,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```channels```: Defines which microphones will be recorded. This is a list containing 0 by default and 1 at the microphones to be included as channels (e.g. [0,0,0,1]). This of course is device-specific, thus any API implementation must resolve the arbitrary input.
 
 **Example input**: ```rh.audio.record("/home/device/test.ogg", 10, "ogg", 16000, [0,0,1,0])```
+
 **Call Output**: ```[None,None]```
+
 **Expected Output**: The audio is captured using one microphone (thus the file contains one channel) and the file exists at ```/home/device/test.ogg```. The audio file has a duration of 10 seconds.
 
 ***
@@ -107,9 +115,11 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```language```: The full name of the language (e.g. "English")
 
 **Example input**: ```rh.audio.speechDetection(["yes", "no", "maybe"], 10.0, "English")```
+
 **Call Output**: 
 - ```[["yes" , 0.59], None]``` if "yes" is detected successfully with a probability of 59%
 - ```[None, "Timeout without speech detection"]``` if no speech existed during the time frame
+
 **Expected Output**: No device output.
 
 ***
@@ -122,7 +132,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.motion.enableMotors()```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: All motors' stiffness is enabled
 
 ***
@@ -134,7 +146,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.motion.disableMotors()```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: All motors' stiffness is removed
 
 ***
@@ -149,7 +163,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```theta_vel```: Rotational velocity in rad/sec
 
 **Example input**: ```rh.motion.moveByVelocity(0.10, 0.0, 0.0)```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The device walks directly ahead till someone stops it (either another command, an obstacle or a cliff)
 
 ***
@@ -164,7 +180,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```theta```: The relative rotation in rads
 
 **Example input**: ```rh.motion.moveTo(0.50, 0.0, 0.785)```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The device walks ahead for 0.5 meters and has eventually has an orientation of 90 degrees
 
 ***
@@ -182,8 +200,11 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.motion.getVelocities()```
+
 **Call Output**: ```[[0.1, 0.2, 0.3], None]```: the device as a x_vel=0.1 m/s, y_vel=0.2 m/s and theta_vel=0.3 rad/s
+
 **Expected Output**: No device output
+
 ***
 
 #Humanoid Motion RAPP Python API calls
@@ -198,7 +219,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```speed```: The motion speed ranging from [0.0, 1.0]
 
 **Example input**: ```rh.humanoid_motion.setJointAngles(["HeadYaw", "HeadPitch"], [0.1, 0.2], 0.5)```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The humanoid moves its head according to the input angles
 
 ***
@@ -211,7 +234,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```joints```: The joints names as a list. The nomenclature used is the one of the [NAO robot](http://doc.aldebaran.com/2-1/family/robots/bodyparts.html#nao-chains)
 
 **Example input**: ```rh.humanoid_motion.getJointAngles(["HeadYaw", "HeadPitch"])```
+
 **Call Output**: ```[[0.1, 0.2], None]```
+
 **Expected Output**: No device output
 
 ***
@@ -224,7 +249,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```hand_name```: The name of the hand to be opened ("Right" or "Left")
 
 **Example input**: ```rh.humanoid_motion.openHand("Right")```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The humanoid opens the right hand
 
 ***
@@ -237,7 +264,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```hand_name```: The name of the hand to be closed ("Right" or "Left")
 
 **Example input**: ```rh.humanoid_motion.closeHand("Right")```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The humanoid closes the right hand
 
 ***
@@ -251,7 +280,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```speed```: The speech of the movement ranging between [0,1], where 1 is the maximum speed.
 
 **Example input**: ```rh.humanoid_motion.goToPosture("Stand")```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The humanoid stands up
 
 ***
@@ -262,7 +293,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.humanoid_motion.getPosture()```
+
 **Call Output**: ```["Sit", None]```. If the robot has no predefined posture, ```Unknown``` is returned.
+
 **Expected Output**: None visible
 
 ***
@@ -275,7 +308,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.sensors.getBatteryLevels()```
+
 **Call Output**: ```[[50,80], None]``` - The robot has two batteries charged 50% and 80%
+
 **Expected Output**: None visible
 
 ***
@@ -286,7 +321,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 **Inputs**: None
 
 **Example input**: ```rh.sensors.getSonarsMeasurements()```
+
 **Call Output**: ```[{'front_left': 1.2, 'front_right': 0.24}, None]``` - This example is for the NAO robot
+
 **Expected Output**: None visible
 
 ***
@@ -300,9 +337,11 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```get_history```: The call stores the tactiles' history every 0.1 seconds and returns it
 
 **Example input**: ```rh.sensors.getTactileMeasurements(1.0, False)```
+
 **Call Output**: ```[{'head_middle': 0.0, 'left_hand_back': 0.0, 'left_hand_right': 0.0, 'right_hand_right': 0.0, 'head_front': 0.0, 'right_hand_left': 0.0, 'left_hand_left': 0.0, 'head_rear': 0.0, 'left_foot': 1.0, 'right_hand_back': 0.0, 'right_foot': 1.0}, None]```. This means that the left Foot and the right Foot bumpers were triggered during the 1.0 second.
 
 **Example input**: ```rh.sensors.getTactileMeasurements(5.0, True)```
+
 **Call Output**: 
 ```[[{'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 1, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}, {'head_front': 0, 'head_middle': 0, 'head_rear': 0}], None]```: The front head sensors was touched for 0.8 seconds (8 times visible)
 
@@ -321,7 +360,9 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```resolution```: The camera resolution. The supported values are one of '40x30', '80x60', '160x120', '320x240', '640x480', '1280x960'. Again the per-device implementation must sort these inputs out.
 
 **Example input**: ```rh.vision.capturePhoto("/home/nao/test.jpg", "front", "1280x960")```
+
 **Call Output**: ```[None, None]```
+
 **Expected Output**: The image must exist at "/home/nao/test.jpg"
 
 
