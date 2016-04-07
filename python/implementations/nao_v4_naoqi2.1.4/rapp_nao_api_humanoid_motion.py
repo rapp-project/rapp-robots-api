@@ -20,14 +20,26 @@ class DeviceHumanoidMotion(HumanoidMotion):
         return [None, None]
 
     def getJointAngles(self, joints):
-        data = self.motion.getAngles(joints) # Not tested
+        data = self.motion.getAngles(joints, False) 
         return [data, None]
 
     def openHand(self, hand_name):
-        return [None, "Not implemented yet"]
+        if hand_name == "Right":
+            self.motion.openHand('RHand')
+        elif hand_name == "Left":
+            self.motion.openHand('LHand')
+        else:
+            return [None, "Error in hand name"]
+        return [None, None]
 
     def closeHand(self, hand_name):
-        return [None, "Not implemented yet"]
+        if hand_name == "Right":
+            self.motion.closeHand('RHand')
+        elif hand_name == "Left":
+            self.motion.closeHand('LHand')
+        else:
+            return [None, "Error in hand name"]
+        return [None, None]
 
     def goToPosture(self, posture, speed):
         if posture not in ["Crouch", "LyingBack", "LyingBelly", "Sit", "SitRelax",\
