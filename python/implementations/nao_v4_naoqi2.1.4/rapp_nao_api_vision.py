@@ -22,9 +22,9 @@ class DeviceVision(Vision):
     def capturePhoto(self, filepath, camera_id, resolution): 
         head, tail = os.path.split(filepath)
         cam_id = -1
-        if camera_id == "Front":
+        if camera_id == "front":
             cam_id = 0
-        elif camera_id == "FrontDown":
+        elif camera_id == "front_down":
             cam_id = 1
         else:
             return [None, "Camera id not supported"]
