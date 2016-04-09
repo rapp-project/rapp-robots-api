@@ -22,10 +22,20 @@ class DeviceAudio(Audio):
         self.speech_recog = ALProxy("ALSpeechRecognition", self.nao_ip, self.nao_port)
         self.memory = ALProxy("ALMemory", self.nao_ip, self.nao_port)
 
-    def speak(self, text, language): 
-        print "NAO robot speaks: \"" + str(text) + "\""
-        self.tts.setLanguage(language)
-        self.tts.say(text)
+    def speak(self, text, language):
+
+        # Sanity conversion
+        _text = str(text)
+
+        # Check for supported languages
+        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',\
+                'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
+        if _language not in supp_lang:
+            return [None, 'Unsupported language']
+
+        print "NAO robot speaks: \"" + str(_text) + "\""
+        self.tts.setLanguage(_language)
+        self.tts.say(_text)
         return [None, None]
 
     # Audio type: wav or ogg

@@ -21,8 +21,8 @@ class RappRobot:
             self.configuration = f.readlines()
 
         # Per-device initialization to allow for flexibility
-        self.parameters["nao_ip"] = self.configuration[0]
-        self.parameters["nao_port"] = self.configuration[1]
+        self.parameters["nao_ip"] = self.configuration[0].replace('\n', '')
+        self.parameters["nao_port"] = self.configuration[1].replace('\n', '')
 
         self.audio = DeviceAudio(self.parameters)
         self.motion = DeviceMotion(self.parameters)
