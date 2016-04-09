@@ -7,7 +7,7 @@ class DeviceAudio(Audio):
     def __init__(self, parameters):
         pass
 
-    def speak(self, text): 
+    def speak(self, text, language): 
         return [None, "Not implemented yet"]
 
     def startRecording(self, filename, audio_type, samplerate, channels): 

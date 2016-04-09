@@ -6,7 +6,7 @@ class Audio:
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def speak(self, text): 
+    def speak(self, text, language): 
         raise NotImplementedError()
 
     @abstractmethod 

@@ -22,8 +22,9 @@ class DeviceAudio(Audio):
         self.speech_recog = ALProxy("ALSpeechRecognition", self.nao_ip, self.nao_port)
         self.memory = ALProxy("ALMemory", self.nao_ip, self.nao_port)
 
-    def speak(self, text): 
+    def speak(self, text, language): 
         print "NAO robot speaks: \"" + str(text) + "\""
+        self.tts.setLanguage(language)
         self.tts.say(text)
         return [None, None]
 
@@ -32,10 +33,23 @@ class DeviceAudio(Audio):
             filename, \
             audio_type = 'ogg', \
             samplerate = 16000, \
-            channels = [0,0,1,0]):
+            channels = [0, 0, 1, 0]):
+
+        inner_channels = channels.copy()
+
+        # If channels are wrong for NAO, assume to record from the front
+        if len(channels) != 4:
+            inner_channels = [0, 0, 1, 0] 
+        else:
+            # Sort out the correct channels. NAO has left-right-front-rear
+            # The robot-agnostic API assumes front-right-rear-left
+            inner_channels[0] = channels[3]
+            inner_channels[2] = channels[1]
+            inner_channels[3] = channels[2]
+
         print "NAO start recording in file: " + str(filename)
         self.audio_rec.startMicrophonesRecording(filename, audio_type, \
-                samplerate, channels)
+                samplerate, inner_channels)
         return [None, None]
 
     def stopRecording(self):
