@@ -104,7 +104,7 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 - ```seconds```: Duration of the recording in seconds
 - ```audio_type```: One of ["wav", "ogg"]
 - ```sample_rate```: Integer value defining the sample rate (e.g. 16000)
-- ```channels```: Defines which microphones will be recorded. This is a list containing 0 by default and 1 at the microphones to be included as channels (e.g. [0,0,0,1]). This of course is device-specific, thus any API implementation must resolve the arbitrary input.
+- ```channels```: Defines which microphones will be recorded. This is a list containing 0 by default and 1 at the microphones to be included as channels (e.g. [0,0,0,1]). This of course is device-specific, thus any API implementation must resolve the arbitrary input. The first channel is assumed to be the Front one and the next follow in a clockwise fashion (e.g. front-right-rear-left)
 
 **Example input**: ```rh.audio.record("/home/device/test.ogg", 10, "ogg", 16000, [0,0,1,0])```
 
