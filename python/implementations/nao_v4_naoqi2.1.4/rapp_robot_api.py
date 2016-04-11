@@ -24,8 +24,11 @@ class RappRobot:
         self.parameters["nao_ip"] = self.configuration[0].replace('\n', '')
         self.parameters["nao_port"] = self.configuration[1].replace('\n', '')
 
-        self.audio = DeviceAudio(self.parameters)
-        self.motion = DeviceMotion(self.parameters)
-        self.sensors = DeviceSensors(self.parameters)
-        self.humanoid_motion = DeviceHumanoidMotion(self.parameters)
-        self.vision = DeviceVision(self.parameters)
+        try:
+          self.audio = DeviceAudio(self.parameters)
+          self.motion = DeviceMotion(self.parameters)
+          self.sensors = DeviceSensors(self.parameters)
+          self.humanoid_motion = DeviceHumanoidMotion(self.parameters)
+          self.vision = DeviceVision(self.parameters)
+        except:
+          print "rapp_robot_api: Not able to connect to proxies. Check the NAO connection"

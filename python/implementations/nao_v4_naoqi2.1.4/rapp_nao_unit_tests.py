@@ -10,15 +10,51 @@ class RappNaoAPIAudioTests(unittest.TestCase):
     def setUp(self):
         self.robot = RappRobot()
 
-    # function 'audio.speak' testing 'unsupported language'
+    # Should produce an error
     def test_speak_wrong_language(self):
         res = self.robot.audio.speak("test", 'Norwegian') 
         self.assertNotEqual(res[1], None)
 
-    # function 'audio.speak' testing 'supported language'
+    def test_speak_no_language(self):
+        res = self.robot.audio.speak("test") 
+        self.assertEqual(res[1], None)
+
+    def test_speak_wrong_text_format(self):
+        res = self.robot.audio.speak([1,2,3], 'English') 
+        self.assertEqual(res[1], None)
+
     def test_speak_correct_language(self):
         res = self.robot.audio.speak("test", 'English') 
         self.assertEqual(res[1], None)
+
+    ###########################################################################
+
+    def test_startRecording_no_filename(self):
+        res = self.robot.audio.startRecording("") 
+        self.assertNotEqual(res[1], None)
+
+    def test_startRecording_wrong_audiotype(self):
+        res = self.robot.audio.startRecording("/home/nao/test.wav", "mp3") 
+        self.assertNotEqual(res[1], None)
+
+    def test_startRecording_wrong_filepath(self):
+        res = self.robot.audio.startRecording("/hme/na/test.wav", "wav") 
+        self.assertNotEqual(res[1], None)
+
+    def test_startRecording_wrong_samplerate(self):
+        res = self.robot.audio.startRecording("/home/nao/test.wav", "wav", -16000) 
+        self.assertNotEqual(res[1], None)
+
+    def test_startRecording_wrong_channels(self):
+        res = self.robot.audio.startRecording("/home/nao/test.wav", "wav", 16000, "test") 
+        self.assertNotEqual(res[1], None)
+
+    ###########################################################################
+
+    def test_play_non_existent_file(self):
+        res = self.robot.audio.playFile("/home/nao/tesssssssst.wav") 
+        self.assertNotEqual(res[1], None)
+
 
 # class RappNaoAPIMotionTests (unittest.TestCase):
     # def test(self):

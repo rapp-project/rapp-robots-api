@@ -10,7 +10,6 @@ from naoqi import ALProxy
 class DeviceVision(Vision):
 
     def __init__(self, parameters):
-        print "NAO vision initiated with parameters: " + str(parameters)
 
         self.nao_ip = parameters["nao_ip"]
         self.nao_port = int(parameters["nao_port"])

@@ -7,7 +7,6 @@ from naoqi import ALProxy
 class DeviceMotion(Motion):
 
     def __init__(self, parameters):
-        print "NAO motion initiated with parameters: " + str(parameters)
 
         self.nao_ip = parameters["nao_ip"]
         self.nao_port = int(parameters["nao_port"])

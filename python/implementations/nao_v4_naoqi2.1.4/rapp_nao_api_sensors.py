@@ -9,7 +9,6 @@ from naoqi import ALProxy
 class DeviceSensors(Sensors):
 
     def __init__(self, parameters):
-        print "NAO sensors initiated with parameters: " + str(parameters)
 
         self.nao_ip = parameters["nao_ip"]
         self.nao_port = int(parameters["nao_port"])
