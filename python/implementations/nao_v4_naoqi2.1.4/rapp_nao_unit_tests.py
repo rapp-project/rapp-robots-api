@@ -97,6 +97,8 @@ class RappNaoAPIAudioTests(unittest.TestCase):
         res = self.robot.audio.speechDetection(['a'], -3.0)
         self.assertNotEqual(res[1], None)
 
+###############################################################################
+
 # Class to perform tests about the humanoid motion functionalities
 class RappNaoAPIHumanoidMotionTests(unittest.TestCase):
     # Setting up the RappRobot class
@@ -166,6 +168,87 @@ class RappNaoAPIHumanoidMotionTests(unittest.TestCase):
         self.assertNotEqual(res[1], None)
         res = self.robot.humanoid_motion.goToPosture('Sit', '0.3')
         self.assertNotEqual(res[1], None)
+
+# Class to perform tests about the motion functionalities
+class RappNaoAPIMotionTests(unittest.TestCase):
+    # Setting up the RappRobot class
+    def setUp(self):
+        self.robot = RappRobot()
+
+    def test_move_velocity_string_inputs(self):
+        ret = self.robot.motion.moveByVelocity('a', 0.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, '0.1', 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, 0.1, '0.1')
+        self.assertNotEqual(ret[1], None)
+
+    def test_move_velocity_out_of_bounds(self):
+        ret = self.robot.motion.moveByVelocity(1.1, 0.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, 1.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, 0.1, 1.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(-1.1, 0.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, -1.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveByVelocity(0.1, 0.1, -1.1)
+        self.assertNotEqual(ret[1], None)
+
+    ###########################################################################
+
+    def test_move_to_string_inputs(self):
+        ret = self.robot.motion.moveTo('a', 0.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveTo(0.1, '0.1', 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveTo(0.1, 0.1, '0.1')
+        self.assertNotEqual(ret[1], None)
+
+        ret = self.robot.motion.moveTo([0.1], 0.1, 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveTo(0.1, [0.1], 0.1)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.motion.moveTo(0.1, 0.1, [0.1])
+        self.assertNotEqual(ret[1], None)
+
+###############################################################################
+
+# Class to perform tests about the sensors functionalities
+class RappNaoAPISensorsTests(unittest.TestCase):
+    # Setting up the RappRobot class
+    def setUp(self):
+        self.robot = RappRobot()
+
+    def test_tactile_wait_not_a_number(self):
+        ret = self.robot.sensors.getTactileMeasurements('1')
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.sensors.getTactileMeasurements([1])
+        self.assertNotEqual(ret[1], None)
+
+    def test_tactile_get_history_not_bool(self):
+        ret = self.robot.sensors.getTactileMeasurements(1.0, 3)
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.sensors.getTactileMeasurements(1.0, '4')
+        self.assertNotEqual(ret[1], None)
+
+###############################################################################
+
+# Class to perform tests about the vision functionalities
+class RappNaoAPIVisionTests(unittest.TestCase):
+    # Setting up the RappRobot class
+    def setUp(self):
+        self.robot = RappRobot()
+
+    def test_vision_capture_wrong_path(self):
+        ret = self.robot.vision.capturePhoto('test.gif')
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.vision.capturePhoto('')
+        self.assertNotEqual(ret[1], None)
+        ret = self.robot.vision.capturePhoto('/test.gif')
+        self.assertNotEqual(ret[1], None)
 
 if __name__ == "__main__":
     unittest.main()

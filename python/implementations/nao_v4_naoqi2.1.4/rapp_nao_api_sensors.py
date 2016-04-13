@@ -61,6 +61,13 @@ class DeviceSensors(Sensors):
     # it is True the returning value is a list of dictionaries containing
     # a snapshot of measurements every 0.1 seconds.
     def getTactileMeasurements(self, wait, get_history = False):
+
+        if type(wait) not in [int, float]:
+            return self.ret_exc('sensors.getTactileMeasurements: Wait not a number')
+
+        if type(get_history) is not bool:
+            return self.ret_exc('sensors.getTactileMeasurements: get_history not bool')
+
         data = {}
         data['head_front'] = 0
         data['head_rear'] = 0

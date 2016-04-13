@@ -33,8 +33,14 @@ class DeviceVision(Vision):
     # and '1280x960'. If it is anything else '640x480 is assumed, being the
     # default value.
     def capturePhoto(self, filepath, camera_id = 'front', resolution = '640x480'): 
+
+        if filepath == '' or '/' not in filepath:
+            return self.ret_exc('vision.capturePhoto: Erroneous filepath')
+
         head, tail = os.path.split(filepath)
         cam_id = 0
+        if camera_id not in ['front', 'front_down']:
+            cam_id = 0
         if camera_id == "front_down":
             cam_id = 1
         l_resolution = resolution

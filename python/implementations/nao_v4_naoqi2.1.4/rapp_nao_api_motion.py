@@ -44,7 +44,7 @@ class DeviceMotion(Motion):
     # Moves the NAO robot by velocities (all inputs are bounded to [-1,+1], where
     # +1 is the maximum positive speed and -1 is the maximum negative speed
     def moveByVelocity(self, x_vel, y_vel, theta_vel):
-        
+
         if x_vel < -1 or x_vel > 1:
             return self.ret_exc('motion.moveByVelocity: x_vel out of bounds')
         if y_vel < -1 or y_vel > 1:
@@ -63,6 +63,14 @@ class DeviceMotion(Motion):
     # Moves the NAO robot to the specified pose. x & y are meters, theta is
     # in radians
     def moveTo(self, x, y, theta):
+    
+        if type(x) not in [float, int]:
+            return self.ret_exc('motion.moveTo: x not a number')
+        if type(y) not in [float, int]:
+            return self.ret_exc('motion.moveTo: y not a number')
+        if type(theta) not in [float, int]:
+            return self.ret_exc('motion.moveTo: theta not a number')
+
         try:
           self.motion.moveTo(x, y, theta)
         except Exception as e:
