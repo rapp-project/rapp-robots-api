@@ -7,8 +7,10 @@ from rapp_robot_api_vision import Vision
 
 from naoqi import ALProxy
 
+# Handles the vision modules of NAO
 class DeviceVision(Vision):
 
+    # Initialization of NAO proxies
     def __init__(self, parameters):
 
         self.nao_ip = parameters["nao_ip"]
@@ -18,19 +20,27 @@ class DeviceVision(Vision):
         self.photo = ALProxy("ALPhotoCapture", self.nao_ip, self.nao_port)
         self.video = ALProxy("ALVideoDevice", self.nao_ip, self.nao_port)
 
-    def capturePhoto(self, filepath, camera_id, resolution): 
+    # Assistive function to return errors
+    def ret_exc(self, text):
+        print text
+        return [None, text]
+
+    # Captures a photo and stores it LOCALLY in NAO.
+    # The filepath must be absolute (not relative)
+    # The camera_id must be one of ['front', 'front_down']. If it is anything
+    # else the 'front' camera is assumed, which is the default value.
+    # Resolution must be one of '40x30', '80x60', '160x120', '320x240', '640x480'
+    # and '1280x960'. If it is anything else '640x480 is assumed, being the
+    # default value.
+    def capturePhoto(self, filepath, camera_id = 'front', resolution = '640x480'): 
         head, tail = os.path.split(filepath)
-        cam_id = -1
-        if camera_id == "front":
-            cam_id = 0
-        elif camera_id == "front_down":
+        cam_id = 0
+        if camera_id == "front_down":
             cam_id = 1
-        else:
-            return [None, "Camera id not supported"]
 
         if resolution not in ['40x30', '80x60', '160x120', '320x240', \
                 '640x480', '1280x960']:
-            return [None, "Resolution id not supported"]
+            l_resolution = '640x480'
 
         resol = {}
         resol['40x30'] = 8
@@ -40,9 +50,13 @@ class DeviceVision(Vision):
         resol['640x480'] = 2
         resol['1280x960'] = 3
 
-        self.photo.setCameraID(cam_id)
-        self.photo.setResolution(resol[resolution])
-        self.photo.takePicture(head, tail)
+        try:
+            self.photo.setCameraID(cam_id)
+            self.photo.setResolution(resol[l_resolution])
+            self.photo.takePicture(head, tail)
+        except Exception as e:
+            self.ret_exc("vision.capturePhoto: Unrecognized exception: " + \
+                e.message)
 
         return [None, "Not implemented yet"]
 
