@@ -32,7 +32,7 @@ class DeviceSensors(Sensors):
             level = self.battery.getBatteryCharge()
             return [[level], None]
         except Exception as e:
-            self.ret_exc("sensors.getBatteryCharge: Unrecognized exception: " + \
+            return eelf.ret_exc("sensors.getBatteryCharge: Unrecognized exception: " + \
                 e.message)
  
     # Returns the two sonars measurements in meters. The result is a python
@@ -42,7 +42,7 @@ class DeviceSensors(Sensors):
             left = self.memory.getData("Device/SubDeviceList/US/Left/Sensor/Value")
             right = self.memory.getData("Device/SubDeviceList/US/Right/Sensor/Value")
         except Exception as e:
-            self.ret_exc("sensors.getSonarsMeasurements: Unrecognized exception: " + \
+            return self.ret_exc("sensors.getSonarsMeasurements: Unrecognized exception: " + \
                 e.message)
 
         data = {}
@@ -80,7 +80,7 @@ class DeviceSensors(Sensors):
         ret = []
 
         if wait < 0.0:
-            self.ret_exc('sensors.getTactileMeasurements: Waiting value is \
+            return self.ret_exc('sensors.getTactileMeasurements: Waiting value is \
                 negative')
 
         iterations = wait / 0.1
@@ -115,7 +115,7 @@ class DeviceSensors(Sensors):
                 fr = self.memory.getData(\
                     "Device/SubDeviceList/RFoot/Bumper/Right/Sensor/Value")
             except Exception as e:
-                self.ret_exc("sensors.getTactileMeasurements: Unrecognized \
+                return self.ret_exc("sensors.getTactileMeasurements: Unrecognized \
                     exception: " + e.message)
 
             if get_history:

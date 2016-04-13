@@ -36,12 +36,13 @@ class DeviceAudio(Audio):
         supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',\
                 'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
         if language not in supp_lang:
-            self.ret_exc('audio.speak: Unsupported language')
+            return self.ret_exc('audio.speak: Unsupported language')
         try:
             self.tts.setLanguage(language)
             self.tts.say(_text)
         except Exception as e:
-            self.ret_exc("audio.speak: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.speak: Unrecognized exception: " + \
+                e.message)
         
         return [None, None]
 
@@ -55,13 +56,13 @@ class DeviceAudio(Audio):
             channels = [0, 0, 1, 0]):
 
         if filename == '':
-            self.ret_exc("audio.startRecording: Invalid filename")
+            return self.ret_exc("audio.startRecording: Invalid filename")
         if audio_type not in ['ogg', 'wav']:
-            self.ret_exc("audio.startRecording: Unsupported audio type")
+            return self.ret_exc("audio.startRecording: Unsupported audio type")
         if samplerate <= 0 or not isinstance(samplerate, int):
-            self.ret_exc("audio.startRecording: Unsupported samplerate")
+            return self.ret_exc("audio.startRecording: Unsupported samplerate")
         if type(channels) is not list:
-            self.ret_exc("audio.startRecording: Not valid channels format")
+            return self.ret_exc("audio.startRecording: Not valid channels format")
 
         # Channels copy
         inner_channels = channels[:]
@@ -81,7 +82,8 @@ class DeviceAudio(Audio):
                 samplerate, inner_channels)
         except Exception as e:
             self.audio_rec.stopMicrophonesRecording()
-            self.ret_exc("audio.startRecording: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.startRecording: Unrecognized exception: " + \
+                e.message)
 
         return [None, None]
 
@@ -90,7 +92,8 @@ class DeviceAudio(Audio):
         try:
             self.audio_rec.stopMicrophonesRecording()
         except Exception as e:
-            self.ret_exc("audio.stopRecording: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.stopRecording: Unrecognized exception: " + \
+                e.message)
         return [None, None]
 
     # Plays a file stored in NAO. Filanema path must be absolute.
@@ -98,7 +101,8 @@ class DeviceAudio(Audio):
         try:
             self.audio_player.playFile(filename)
         except Exception as e:
-            self.ret_exc("audio.playFile: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.playFile: Unrecognized exception: " + \
+                e.message)
         return [None, None]
 
     # Sets the NAO volume. The volume must be between 0 and 100, integer.
@@ -109,7 +113,8 @@ class DeviceAudio(Audio):
         try:
             self.audio_device.setOutputVolume(volume)
         except Exception as e:
-            self.ret_exc("audio.setVolume: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.setVolume: Unrecognized exception: " + \
+                e.message)
 
         return [None, None]
 
@@ -125,13 +130,13 @@ class DeviceAudio(Audio):
         [ret, err] = \
                 self.startRecording(filename, audio_type, samplerate, channels)
         if err != None:
-            self.ret_exc('audio.record: ' + err)
+            return self.ret_exc('audio.record: ' + err)
 
         time.sleep(seconds)
 
         [ret, err] = self.stopRecording()
         if err != None:
-            self.ret_exc('audio.record: ' + err)
+            return self.ret_exc('audio.record: ' + err)
         
         return [None, None]
 
@@ -143,25 +148,26 @@ class DeviceAudio(Audio):
 
         # Sanity checks
         if type(vocabulary) is not list:
-            self.ret_exc('audio.speechDetection: Vocabulary not a list')
+            return self.ret_exc('audio.speechDetection: Vocabulary not a list')
         if type(wait) is not float and type(wait) is not int:
-            self.ret_exc('audio.speechDetection: Wait param not a number')
+            return self.ret_exc('audio.speechDetection: Wait param not a number')
         if wait <= 0:
-            self.ret_exc('audio.speechDetection: Wait param negative value')
+            return self.ret_exc('audio.speechDetection: Wait param negative value')
 
         # Setting language and activating the speech recognition
         try:
             self.speech_recog.setLanguage(language)
             self.speech_recog.setVocabulary(vocabulary, False)
         except Exception as e:
-            self.ret_exc("audio.speechDetection: Unrecognized exception: " + e.message)
+            return self.ret_exc("audio.speechDetection: Unrecognized exception: " + \
+                e.message)
 
         # Subscribing to the speech recognition event
         try:
             self.speech_recog.subscribe("rapp_speech_rec")
         except Exception as e:
-            self.ret_exc('audio.speechDetection: Not able to subscribe to speech \
-                    recognition system: ' + e.message)
+            return self.ret_exc('audio.speechDetection: Not able to subscribe \
+                to speech recognition system: ' + e.message)
 
         # Wait for 'wait' seconds
         try:
@@ -170,20 +176,25 @@ class DeviceAudio(Audio):
                 time.sleep(0.1)
                 iterations -= 1
         except Exception as e:
-            self.ret_exc('audio.speechDetection: Something wrong with NAO memory proxy: ' +\
-                    e.message)
+            
+            self.speech_recog.unsubscribe("rapp_speech_rec")
+            return self.ret_exc('audio.speechDetection: Something wrong with \
+                NAO memory proxy: ' + e.message)
 
         # If no speech detected return error
         if iterations <= 0:
-            self.ret_exc("audio.speechDetection: Timeout without speech detection")
+            self.speech_recog.unsubscribe("rapp_speech_rec")
+            return self.ret_exc("audio.speechDetection: Timeout without speech \
+                detection")
 
         # Read the recognized words and return them
         try:
             [word, probability] = self.memory.getData("WordRecognized")
             self.speech_recog.unsubscribe("rapp_speech_rec")
         except Exception as e:
-            self.ret_exc('audio.speechDetection: Error in unsubscription from speech \
-                    recognition: ' + e.message)
+            self.speech_recog.unsubscribe("rapp_speech_rec")
+            return self.ret_exc('audio.speechDetection: Error in unsubscription \
+                from speech recognition: ' + e.message)
 
         return [[word, probability], None]
 

@@ -26,7 +26,7 @@ class DeviceMotion(Motion):
         try:
           self.motion.stiffnessInterpolation('Body', 1.0, 0.5)
         except Exception as e:
-            self.ret_exc("motion.enableMotors: Unrecognized exception: " + \
+            return self.ret_exc("motion.enableMotors: Unrecognized exception: " + \
                 e.message)
 
         return [None, None]
@@ -36,7 +36,7 @@ class DeviceMotion(Motion):
         try:
           self.motion.stiffnessInterpolation('Body', 0.0, 0.5)
         except Exception as e:
-            self.ret_exc("motion.disableMotors: Unrecognized exception: " + \
+            return self.ret_exc("motion.disableMotors: Unrecognized exception: " + \
                 e.message)
 
         return [None, None]
@@ -46,16 +46,16 @@ class DeviceMotion(Motion):
     def moveByVelocity(self, x_vel, y_vel, theta_vel):
         
         if x_vel < -1 or x_vel > 1:
-            self.ret_exc('motion.moveByVelocity: x_vel out of bounds')
+            return self.ret_exc('motion.moveByVelocity: x_vel out of bounds')
         if y_vel < -1 or y_vel > 1:
-            self.ret_exc('motion.moveByVelocity: y_vel out of bounds')
+            return self.ret_exc('motion.moveByVelocity: y_vel out of bounds')
         if theta_vel < -1 or theta_vel > 1:
-            self.ret_exc('motion.moveByVelocity: theta_vel out of bounds')
+            return self.ret_exc('motion.moveByVelocity: theta_vel out of bounds')
 
         try:
             self.motion.moveToward(x_vel, y_vel, theta_vel)
         except Exception as e:
-            self.ret_exc("motion.moveByVelocity: Unrecognized exception: " + \
+            return self.ret_exc("motion.moveByVelocity: Unrecognized exception: " + \
                 e.message)
 
         return [None, None]
@@ -66,7 +66,7 @@ class DeviceMotion(Motion):
         try:
           self.motion.moveTo(x, y, theta)
         except Exception as e:
-            self.ret_exc("motion.moveTo: Unrecognized exception: " + \
+            return self.ret_exc("motion.moveTo: Unrecognized exception: " + \
                 e.message)
 
         return [None, None]
@@ -77,7 +77,7 @@ class DeviceMotion(Motion):
         try:
             self.motion.stopMove()
         except Exception as e:
-            self.ret_exc("motion.stop: Unrecognized exception: " + \
+            return self.ret_exc("motion.stop: Unrecognized exception: " + \
                 e.message)
 
         return [None, None]
@@ -88,7 +88,7 @@ class DeviceMotion(Motion):
             data = self.motion.getRobotVelocity()
             return [data, None]
         except Exception as e:
-            self.ret_exc("motion.getVelocities: Unrecognized exception: " + \
+            return self.ret_exc("motion.getVelocities: Unrecognized exception: " + \
                 e.message)
 
 

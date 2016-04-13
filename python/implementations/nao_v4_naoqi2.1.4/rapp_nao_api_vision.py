@@ -55,7 +55,7 @@ class DeviceVision(Vision):
             self.photo.setResolution(resol[l_resolution])
             self.photo.takePicture(head, tail)
         except Exception as e:
-            self.ret_exc("vision.capturePhoto: Unrecognized exception: " + \
+            return self.ret_exc("vision.capturePhoto: Unrecognized exception: " + \
                 e.message)
 
         return [None, "Not implemented yet"]

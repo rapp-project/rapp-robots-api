@@ -26,7 +26,10 @@ rh.audio.playFile('/home/nao/temp.ogg')
 
 rh.audio.speak('Testing speech detection for 5 seconds. The words are in and out')
 [r,e] = rh.audio.speechDetection(['in', 'out'], 5)
-rh.audio.speak('The word captured was ' + str(r[0]))
+if r == None:
+    rh.audio.speak('No words captured')
+else:
+    h.audio.speak('The word captured was ' + str(r[0]))
 
 ###############################################################################
 

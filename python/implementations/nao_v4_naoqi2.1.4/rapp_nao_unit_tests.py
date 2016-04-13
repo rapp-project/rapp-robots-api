@@ -31,22 +31,27 @@ class RappNaoAPIAudioTests(unittest.TestCase):
 
     def test_startRecording_no_filename(self):
         res = self.robot.audio.startRecording("") 
+        self.robot.audio.stopRecording()
         self.assertNotEqual(res[1], None)
 
     def test_startRecording_wrong_audiotype(self):
         res = self.robot.audio.startRecording("/home/nao/test.wav", "mp3") 
+        self.robot.audio.stopRecording()
         self.assertNotEqual(res[1], None)
 
     def test_startRecording_wrong_filepath(self):
         res = self.robot.audio.startRecording("/hme/na/test.wav", "wav") 
+        self.robot.audio.stopRecording()
         self.assertNotEqual(res[1], None)
 
     def test_startRecording_wrong_samplerate(self):
         res = self.robot.audio.startRecording("/home/nao/test.wav", "wav", -16000) 
+        self.robot.audio.stopRecording()
         self.assertNotEqual(res[1], None)
 
     def test_startRecording_wrong_channels(self):
         res = self.robot.audio.startRecording("/home/nao/test.wav", "wav", 16000, "test") 
+        self.robot.audio.stopRecording()
         self.assertNotEqual(res[1], None)
 
     ###########################################################################

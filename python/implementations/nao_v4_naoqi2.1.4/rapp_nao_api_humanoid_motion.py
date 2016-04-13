@@ -38,15 +38,15 @@ class DeviceHumanoidMotion(HumanoidMotion):
         
         for j in joints:
             if j not in self.allowed_joints:
-                self.ret_exc('hunanoid_motion.setJointAngles: Not a valid \
+                return self.ret_exc('hunanoid_motion.setJointAngles: Not a valid \
                         joint: ' + str(j))
         if speed <= 0 or speed > 1:
-            self.ret_exc('humanoid_motion.setJointAngles: Speed out of bounds')
+            return self.ret_exc('humanoid_motion.setJointAngles: Speed out of bounds')
 
         try:
             self.motion.setAngles(joints, angles, speed)
         except Exception as e:
-            self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
+            return self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
                     + e.message)
 
         return [None, None]
@@ -57,13 +57,13 @@ class DeviceHumanoidMotion(HumanoidMotion):
     def getJointAngles(self, joints):
         for i in joints:
             if i not in self.allowed_joints:
-                self.ret_exc('hunanoid_motion.getJointAngles: Not a valid \
+                return self.ret_exc('hunanoid_motion.getJointAngles: Not a valid \
                         joint: ' + str(j))
 
         try:
             data = self.motion.getAngles(joints, False) 
         except Exception as e:
-            self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
+            return self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
                     + e.message)
 
         return [data, None]
@@ -71,7 +71,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
     # Opens a hand of a humanoid robot. The input must be 'Right' or 'Left'
     def openHand(self, hand_name):
         if hand_name not in ['Right', 'Left']:
-            self.ret_exc('humanoid_motion.openHand: Unsupported hand name: ' +\
+            return self.ret_exc('humanoid_motion.openHand: Unsupported hand name: ' +\
                     hand_name)
         try:
             if hand_name == "Right":
@@ -79,7 +79,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
             elif hand_name == "Left":
                 self.motion.openHand('LHand')
         except Exception as e:
-            self.ret_exc("humanoid_motion.openHand: Unrecognized exception: "\
+            return self.ret_exc("humanoid_motion.openHand: Unrecognized exception: "\
                     + e.message)
 
         return [None, None]
@@ -87,7 +87,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
     # Closes a NAO's hand. The input must be 'Right' or 'Left'
     def closeHand(self, hand_name):
         if hand_name not in ['Right', 'Left']:
-            self.ret_exc('humanoid_motion.closeHand: Unsupported hand name: ' +\
+            return self.ret_exc('humanoid_motion.closeHand: Unsupported hand name: ' +\
                     hand_name)
 
         if hand_name == "Right":
@@ -102,16 +102,16 @@ class DeviceHumanoidMotion(HumanoidMotion):
     def goToPosture(self, posture, speed):
         if posture not in ["Crouch", "LyingBack", "LyingBelly", "Sit", "SitRelax",\
                 "Stand", "StandInit", "StandZero"]:
-            self.ret_exc("humanoid_motion.goToPosture: Not supported posture: " +\
+            return self.ret_exc("humanoid_motion.goToPosture: Not supported posture: " +\
                     posture)
 
         if speed <= 0.0 or speed > 1.0:
-            self.ret_exc('humanoid_motion.goToPosture: Speed out of bounds')
+            return self.ret_exc('humanoid_motion.goToPosture: Speed out of bounds')
 
         try:
             self.posture.goToPosture(posture, speed)
         except Exception as e:
-            self.ret_exc("humanoid_motion.goToPosture: Unrecognized exception: "\
+            return self.ret_exc("humanoid_motion.goToPosture: Unrecognized exception: "\
                     + e.message)
 
         return [None, None]
@@ -123,7 +123,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
             ans = self.posture.getPosture()
             return [ans, None]
         except Exception as e:
-            self.ret_exc("humanoid_motion.getPosture: Unrecognized exception: "\
+            return self.ret_exc("humanoid_motion.getPosture: Unrecognized exception: "\
                     + e.message)
 
 
