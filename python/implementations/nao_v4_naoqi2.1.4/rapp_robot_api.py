@@ -5,6 +5,7 @@ from rapp_nao_api_motion import DeviceMotion
 from rapp_nao_api_sensors import DeviceSensors
 from rapp_nao_api_humanoid_motion import DeviceHumanoidMotion
 from rapp_nao_api_vision import DeviceVision
+from rapp_nao_api_utilities import Utilities
 
 import os
 
@@ -30,5 +31,6 @@ class RappRobot:
           self.sensors = DeviceSensors(self.parameters)
           self.humanoid_motion = DeviceHumanoidMotion(self.parameters)
           self.vision = DeviceVision(self.parameters)
+          self.utilities = Utilities(self.parameters)
         except:
           print "rapp_robot_api: Not able to connect to proxies. Check the NAO connection"
