@@ -36,7 +36,7 @@ class DeviceSensors(Sensors):
                 e.message)
  
     # Returns the two sonars measurements in meters. The result is a python
-    # dictionaryu containing 'front_left' and 'front_right'
+    # dictionary containing 'front_left' and 'front_right'
     def getSonarsMeasurements(self):
         try:
             left = self.memory.getData("Device/SubDeviceList/US/Left/Sensor/Value")
