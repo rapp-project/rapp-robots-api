@@ -103,7 +103,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
         if posture not in ["Crouch", "LyingBack", "LyingBelly", "Sit", "SitRelax",\
                 "Stand", "StandInit", "StandZero"]:
             self.ret_exc("humanoid_motion.goToPosture: Not supported posture: " +\
-                    posture]
+                    posture)
 
         if speed <= 0.0 or speed > 1.0:
             self.ret_exc('humanoid_motion.goToPosture: Speed out of bounds')

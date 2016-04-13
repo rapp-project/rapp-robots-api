@@ -37,7 +37,7 @@ class DeviceVision(Vision):
         cam_id = 0
         if camera_id == "front_down":
             cam_id = 1
-
+        l_resolution = resolution
         if resolution not in ['40x30', '80x60', '160x120', '320x240', \
                 '640x480', '1280x960']:
             l_resolution = '640x480'
