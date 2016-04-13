@@ -55,7 +55,7 @@ class DeviceAudio(Audio):
             samplerate = 16000, \
             channels = [0, 0, 1, 0]):
 
-        if filename == '':
+        if filename == '' or '/' not in filename:
             return self.ret_exc("audio.startRecording: Invalid filename")
         if audio_type not in ['ogg', 'wav']:
             return self.ret_exc("audio.startRecording: Unsupported audio type")
@@ -108,7 +108,7 @@ class DeviceAudio(Audio):
     # Sets the NAO volume. The volume must be between 0 and 100, integer.
     def setVolume(self, volume):
         if type(volume) is not int or volume < 0 or volume > 100:
-            self.ret_exc("audio.setVolume: Wrong volume format or value")
+            return self.ret_exc("audio.setVolume: Wrong volume format or value")
 
         try:
             self.audio_device.setOutputVolume(volume)
@@ -127,6 +127,9 @@ class DeviceAudio(Audio):
             samplerate = 16000, \
             channels = [0,0,1,0]):
 
+        if seconds <= 0.0:
+            return self.ret_exc('audio.record: Negative time given')
+
         [ret, err] = \
                 self.startRecording(filename, audio_type, samplerate, channels)
         if err != None:
@@ -137,7 +140,7 @@ class DeviceAudio(Audio):
         [ret, err] = self.stopRecording()
         if err != None:
             return self.ret_exc('audio.record: ' + err)
-        
+
         return [None, None]
 
     # Performs speech detection with the NAO engine. 
