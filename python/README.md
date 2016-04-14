@@ -32,14 +32,15 @@ Nevertheless, since the actual robots have (or should have) their RAPP robot Pyt
 
 #Audio RAPP Python API calls
 
-###rh.audio.speak(text)
+###rh.audio.speak(text, language)
 
 **Description**: The device dictates a ```text```
 
 **Inputs**:
 - ```text```: A string containing the text to be dictated by the device
+- ```language```: A string containing the language
 
-**Example input**: ```rh.audio.speak("Hello there")```
+**Example input**: ```rh.audio.speak("Hello there", "English")```
 **Call Output**: ```[None,None]```
 **Expected Output**: The device dictates "Hello there"
 
