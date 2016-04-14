@@ -20,10 +20,21 @@ class Utilities:
 
     # This function helps to move files from the NAO robot to a PC, in case
     # the application is remotely executed in the PC
-    def moveFile(self, nao_file, pc_file):
+    def moveFileToPC(self, nao_file, pc_file):
         try:
-            command = "scp -p 'nao' nao@" + self.nao_ip + ":" + nao_file + " " + pc_file
-            print command
+            command = 'sshpass -p "nao" scp nao@' + self.nao_ip + ":" + \
+                    nao_file + " " + pc_file
+            os.system(command)
+        except Exception as e:
+            return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
+                    e.message)
+
+    # This function helps to move files from the PC to a NAO robot, in case
+    # the application is remotely executed in the PC
+    def moveFileToNAO(self, nao_file, pc_file):
+        try:
+            command = 'sshpass -p "nao" scp ' + pc_file + \
+                    ' nao@' + self.nao_ip + ":" + nao_file
             os.system(command)
         except Exception as e:
             return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
