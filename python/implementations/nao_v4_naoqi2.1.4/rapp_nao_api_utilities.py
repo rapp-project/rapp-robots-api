@@ -28,6 +28,7 @@ class Utilities:
         except Exception as e:
             return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
                     e.message)
+        return [None, None]
 
     # This function helps to move files from the PC to a NAO robot, in case
     # the application is remotely executed in the PC
@@ -39,3 +40,4 @@ class Utilities:
         except Exception as e:
             return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
                     e.message)
+        return [None, None]
