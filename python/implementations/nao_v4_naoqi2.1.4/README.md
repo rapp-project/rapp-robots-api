@@ -1,5 +1,12 @@
 This folder contains the NAO-specific rapp-robot-api implementation. For information concerning the entirety of the calls, please visit the [generic README file](https://github.com/rapp-project/rapp-robots-api/tree/master/python), as here specific information about the NAO implementation exist. 
 
+If you want to utilize the API remotely, your PC must be in the same LAN as the NAO and you have to declare NAO's IP in [this file](https://github.com/rapp-project/rapp-robots-api/blob/master/python/implementations/nao_v4_naoqi2.1.4/nao_connectivity). If you want to install the API in the real robot and execute the applications there, you have to move the API in the readl NAO under the ```PATH_TO_API``` folder, change the IP to ```127.0.0.1``` and add the following lines to the ```~/.bash_profile``` file:
+
+```
+export PYTHONPATH=$PYTHONPATH:PATH_TO_API/python/abstract_classes
+export PYTHONPATH=$PYTHONPATH:PATH_TO_API/python/implementations/nao_v4_naoqi2.1.4
+```
+
 ## Special considerations concerning the generic API calls
 
 NOTE: Where the "default" value is mentioned, it means that if you do not provide this input parameter at all, this value will be automatically set.
