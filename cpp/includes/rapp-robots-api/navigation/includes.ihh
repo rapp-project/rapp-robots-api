@@ -1,0 +1,7 @@
+#include <string>
+#include <vector>
+#include "../../objects/pose/pose.hpp" 
+#include "../../objects/path/path.hpp" 
+#include "../../objects/poseStamped/poseStamped.hpp" 
+#include "../../objects/picture/picture.hpp"
+#include "../../objects/qrCodeMap/qrCodeMap.hpp"
