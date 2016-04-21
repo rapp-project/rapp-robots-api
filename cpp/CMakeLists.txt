@@ -17,6 +17,8 @@ PROJECT(RappRobots)
 cmake_minimum_required(VERSION 2.8)
 
 find_package(Rapp REQUIRED)
+MESSAGE(STATUS ${RAPP_INCLUDE_DIRS})
+include_directories(${RAPP_INCLUDE_DIRS})
 
 # Find PThreads (needed by Boost)
 find_package(Threads REQUIRED)
@@ -128,3 +130,5 @@ if (${BUILD_TESTS})
 else()
     message(STATUS "Not Building tests - enable with `-DBUILD_TESTS=ON`")
 endif()
+
+add_subdirectory(implementations)

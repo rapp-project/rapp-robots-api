@@ -6,7 +6,7 @@
 namespace rapp {
 namespace robot {
 
-class vision_impl;
+class VisionImpl;
 
 /**
  * \class vision
@@ -85,7 +85,7 @@ public:
      *
      * \return QR-codes informations
      */
-    rapp::object::qr_code_3d qr_code_detection(rapp::object::picture image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size = 0.16f);
+    rapp::object::QRCode3D qr_code_detection(rapp::object::picture image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size = 0.16f);
 
 private:
     /**
@@ -93,7 +93,7 @@ private:
      * 
      * \see Cheshire Cat (pimpl) programming pattern
      */
-    vision_impl * pimpl;
+    VisionImpl * pimpl;
 };
 
 } /* namespace robot */

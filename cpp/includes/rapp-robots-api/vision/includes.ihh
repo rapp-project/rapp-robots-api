@@ -2,6 +2,6 @@
 #include <string>
 #include <vector>
 
-#include "../../objects/picture/picture.hpp"
-#include "../../objects/qr_code_3d/qr_code_3d.hpp" 
+#include "rapp/objects/picture/picture.hpp"
+#include "rapp/objects/QRCode3D/QRCode3D.hpp" 
 
