@@ -49,6 +49,9 @@ class navigation
      */
     // this is NOT a BLOCKING CALL.
     bool moveVel(float x, float y, float theta);
+    // version for non-holonomic
+    bool moveVel(float x, float theta);
+
     /**
      * moveStop - Stop robot movement - movement initiated by moveTo, moveVel and moveAlongPath methods.
 
@@ -84,7 +87,8 @@ class navigation
      */
     // this is a BLOCKING CALL.
     bool moveJoint(std::vector<std::string> joint, std::vector<float> angle, float speed);
-    /**
+    bool moveJoint(std::vector<std::string> joint, std::vector<float> angle);
+     /**
      * takePredefinedPosture - Take predefined robot posture. 
      *
      * @param posture - name of the predefined posture: StandInit, Stand, StandZero, LyingBack, LyingBelly, Crouch, Sit, SitRelax.
