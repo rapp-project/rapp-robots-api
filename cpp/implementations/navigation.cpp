@@ -29,12 +29,22 @@ bool navigation::moveVel(float x, float y, float theta)
     return true;
 }
 
+bool navigation::moveVel(float x, float theta)
+{
+    return true;
+}
+
 bool navigation::moveStop()
 {
     return true;
 }
 
 bool navigation::moveJoint(std::vector<std::string> joint, std::vector<float> angle, float speed)
+{
+    return true;
+}
+
+bool navigation::moveJoint(std::vector<std::string> joint, std::vector<float> angle)
 {
     return true;
 }
