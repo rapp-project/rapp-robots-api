@@ -44,7 +44,7 @@ public:
      * 
      * \return
      */
-    bool playAudio(const std::string & file_path, double position, double volume, double balance, bool play_in_loop); 
+    bool play_audio(const std::string & file_path, double position, double volume, double balance, bool play_in_loop); 
 
     /** 
      * Say given sentence in selected language
@@ -54,7 +54,7 @@ public:
      * 
      * \return 
      */
-    bool textToSpeech(const std::string & str, Language language = Language::ENGLISH);
+    bool text_to_speech(const std::string & str, Language language = Language::ENGLISH);
 
     /**
      * Recognize the word included in the database
@@ -66,7 +66,7 @@ public:
      * 
      * \todo use vector<string> instead of string[]
      */
-    std::string wordSpotting(std::string dictionary[], int size);
+    std::string word_spotting(std::string dictionary[], int size);
 
     /**
      * Record the audio message from the microphones by the desired time
@@ -75,7 +75,7 @@ public:
      * 
      * \return
      */
-    std::string captureAudio(int time);
+    std::string capture_audio(int time);
 
     /**
      * Record the audio message with silence detection
@@ -84,7 +84,7 @@ public:
      * \param waiting_time
      * \param microphone_energy
      */
-    std::string captureAudio(std::string & file_path, float waiting_time, int microphone_energy);
+    std::string capture_audio(std::string & file_path, float waiting_time, int microphone_energy);
 
     /**
      * Return signal energy of the selected microphone
@@ -93,7 +93,7 @@ public:
      * 
      * \return
      */
-    int microphoneEnergy(std::string & name);
+    int microphone_energy(std::string & name);
 
     /**
      * Record the audio message to the buffer 
@@ -101,7 +101,7 @@ public:
      * \param start
      * \param buffer
      */
-    void voiceRecord(bool start, std::vector< std::vector<unsigned char> > & buffer);
+    void voice_record(bool start, std::vector< std::vector<unsigned char> > & buffer);
 
 private:
     CommunicationImpl * pimpl;
