@@ -126,7 +126,7 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // This is a BLOCKING CALL
-    bool moveAlongPath(std::vector<rapp::object::PoseStamped> poses);
+    bool moveAlongPath(std::vector<rapp::object::pose_stamped> poses);
     /**
      * getRobotPose - returns robot pose given in the global frame.
      *
@@ -134,14 +134,14 @@ class navigation
      * @return current robot pose in the global frame.
      */
     // getRobotPose - returns robot pose given in the map frame.
-    rapp::object::PoseStamped getRobotPose();
+    rapp::object::pose_stamped getRobotPose();
     /**
      * setGlobalPose - sets new robot pose in the global frame. Usually is used to set new robots pose that was estimated by one of global localization methods (e.g. QR-localization).
      *
      *
      * @return call status (false - Failed, true - Success)
      */
-    bool setGlobalPose(rapp::object::Pose rapp_pose);
+    bool setGlobalPose(rapp::object::pose rapp_pose);
     /**
      * @brief getTransform - return homogeneous transformation matrix of given chain in the given space.
      *

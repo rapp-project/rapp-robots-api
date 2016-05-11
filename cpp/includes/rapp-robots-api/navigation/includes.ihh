@@ -2,8 +2,6 @@
 #include <vector>
 #include <rapp/objects/pose/pose.hpp>
 
-#include <rapp/objects/poseStamped/poseStamped.hpp>
-#include <rapp/objects/qrCodeMap/qrCodeMap.hpp>
+#include <rapp/objects/pose_stamped/pose_stamped.hpp>
+#include <rapp/objects/qr_code_map/qr_code_map.hpp>
 
-//for getTransform:
-#include <rapp/objects/matrix2D/matrix2D.hpp>

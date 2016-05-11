@@ -64,17 +64,17 @@ bool navigation::rest(std::string posture)
     return true;
 }
 
-bool navigation::moveAlongPath(std::vector<rapp::object::PoseStamped> poses)
+bool navigation::moveAlongPath(std::vector<rapp::object::pose_stamped> poses)
 {
     return true;
 }
 
-rapp::object::PoseStamped navigation::getRobotPose()
+rapp::object::pose_stamped navigation::getRobotPose()
 {
-    return rapp::object::PoseStamped();
+    return rapp::object::pose_stamped();
 }
 
-bool navigation::setGlobalPose(rapp::object::Pose rapp_pose)
+bool navigation::setGlobalPose(rapp::object::pose rapp_pose)
 {
     return true;
 }
