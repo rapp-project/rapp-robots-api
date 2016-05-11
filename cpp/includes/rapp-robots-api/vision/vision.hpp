@@ -85,7 +85,7 @@ public:
      *
      * \return QR-codes informations
      */
-    rapp::object::QRCode3D qr_code_detection(rapp::object::picture::Ptr image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size = 0.16f);
+    rapp::object::qr_code_3d qr_code_detection(rapp::object::picture::Ptr image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size = 0.16f);
 
 private:
     /**
