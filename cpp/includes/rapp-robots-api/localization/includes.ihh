@@ -1,0 +1,6 @@
+#include <rapp/objects/planned_path/planned_path.hpp>
+#include <rapp/objects/pose/pose.hpp>
+#include <rapp/objects/pose_stamped/pose_stamped.hpp>
+#include <rapp/objects/qr_code_3d/qr_code_3d.hpp>
+#include <rapp/objects/qr_code_map/qr_code_map.hpp>
+
