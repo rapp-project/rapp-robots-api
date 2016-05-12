@@ -113,6 +113,7 @@ std::vector<double> row;
 }
 
 	rapp::object::pose getRobotPoseFromQRcodeMap(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, rapp::object::qr_code_map QRmap){
+		rapp::object::pose robot_in_map_pose_RAPP;
 
 		if (QRcodes.number_of_qr_codes > 0){
 
@@ -140,18 +141,18 @@ std::vector<double> row;
 
 			// compute transformation matrix from map origin to detected QRcode using QRcodeMap
 			//geometry_msgs::Pose QRcode_ROS_pose;
-			//Eigen::Affine3d map_to_QRcode_transform; 
+			//Eigen::Affine3f map_to_QRcode_transform; 
 
 
 			// // ... NEW APPROACH
 
-			Eigen::Quaternion<double> map_to_qr_code_quaternion(QRmap.poses[mapped_qrcode_ordinal_nr].orientation.w, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.x, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.y, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.z);
+			Eigen::Quaternion<float> map_to_qr_code_quaternion(QRmap.poses[mapped_qrcode_ordinal_nr].orientation.w, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.x, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.y, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.z);
 			//Eigen::Matrix3d rotationMatrix = q.matrix();
 
-			Eigen::Translation<double,3> map_to_qr_code_translation;
-			Eigen::Transform<double,3,Eigen::Affine>  map_to_QRcode_transform= Eigen::Transform<float,3,Eigen::Affine>::Identity();
-			map_to_QRcode_transform.translate(map_to_qr_code_translation);
-			map_to_QRcode_transform.rotate(map_to_qr_code_quaternion);
+			Eigen::Translation<float,3> map_to_qr_code_translation;
+			Eigen::Transform<float,3,Eigen::Affine>  map_to_QRcode_transform= Eigen::Transform<float,3,Eigen::Affine>::Identity();
+			map_to_QRcode_transform = map_to_qr_code_quaternion*map_to_qr_code_translation;
+			//map_to_QRcode_transform.rotate(map_to_qr_code_quaternion);
 			/*
 			 tf::Quaternion q(QR
 
@@ -179,23 +180,23 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 			 								QRmap.poses[0].position.z, roll0, pitch0, yaw0);
 */
 			std::vector<std::vector<double>> T_r_qr;
-			T_r_qr = QRcodes.LandmarkInCameraCoordinate[found_qrcode_ordinal_nr];
+			T_r_qr = QRcodes.landmark_in_camera_coordinate[found_qrcode_ordinal_nr];
 
 	
-			Eigen::Matrix4d matrix_robot_to_QRcode;
-			Eigen::Vector3d translation_robot_to_QRcode( T_r_qr[0][3],T_r_qr[1][3],T_r_qr[2][3]);
+			Eigen::Matrix4f matrix_robot_to_QRcode;
+			Eigen::Vector3f translation_robot_to_QRcode((float) T_r_qr[0][3], (float) T_r_qr[1][3], (float) T_r_qr[2][3]);
 
-			 matrix_robot_to_QRcode << T_r_qr[0][0], T_r_qr[0][1], T_r_qr[0][2],T_r_qr[0][3],
-			  			T_r_qr[1][0], T_r_qr[1][1], T_r_qr[1][2],T_r_qr[1][3],
-			  			T_r_qr[2][0], T_r_qr[2][1], T_r_qr[2][2],T_r_qr[2][3],
+			 matrix_robot_to_QRcode << (float) T_r_qr[0][0],(float) T_r_qr[0][1],(float) T_r_qr[0][2], (float) T_r_qr[0][3],
+			  			(float) T_r_qr[1][0], (float) T_r_qr[1][1], (float) T_r_qr[1][2], (float) T_r_qr[1][3],
+			  			(float) T_r_qr[2][0],(float) T_r_qr[2][1],(float) T_r_qr[2][2],(float)T_r_qr[2][3],
 			  			0,0,0,1;
-			  Eigen::Affine3d Affine3d_robot_to_QRcode, Affine3d_T_qr_r;
+			  Eigen::Affine3f Affine3f_robot_to_QRcode, Affine3f_T_qr_r;
 
-			  Affine3d_robot_to_QRcode.matrix()=matrix_robot_to_QRcode;
-			  Affine3d_T_qr_r = Affine3d_robot_to_QRcode.inverse(); 
+			  Affine3f_robot_to_QRcode.matrix() = matrix_robot_to_QRcode;
+			  Affine3f_T_qr_r = Affine3f_robot_to_QRcode.inverse(); 
 
 			  std::vector<std::vector<double>> T_g_r;
-			  //MatrixMul( Affine3d_T_qr_r.matrix(),T_g_qr, T_g_r,4);
+			  //MatrixMul( Affine3f_T_qr_r.matrix(),T_g_qr, T_g_r,4);
 
 				// std::cout<< "KONIEC:" <<std::endl;
 				// for(int i=0; i<4; i++){
@@ -206,7 +207,7 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 				// }		
 
 			  //rotation_matrix_robot_to_QRcode;//.toRotationMatrix();//.matrix() = rotation_matrix_robot_to_QRcode//create_rotation_matrix(1.0, 1.0, 1.0);
-			  //r.matrix().rightCols<1>() = translation_robot_to_QRcode;//Eigen::Affine3d t(Eigen::Translation3d(Eigen::Vector3d(1,1,2)));
+			  //r.matrix().rightCols<1>() = translation_robot_to_QRcode;//Eigen::Affine3f t(Eigen::Translation3d(Eigen::Vector3d(1,1,2)));
 
 			  //Eigen::Matrix4d m = (t * r).matrix(); // Option 1
 
@@ -229,21 +230,21 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 			// compute transformation from map to robot
 				// !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			//geometry_msgs::Pose robot_in_map_pose_ROS;
-			rapp::object::pose robot_in_map_pose_RAPP;
-			Eigen::Affine3d map_to_camera_transform, camera_to_robot_transform, map_to_robot_transform;
-			double mT_g_r[4][4];
+			
+			Eigen::Affine3f map_to_camera_transform, camera_to_robot_transform, map_to_robot_transform;
+			/*float mT_g_r[4][4];
 			for(int i=0; i<4; i++){
 			for(int j=0; j<4;j++){
 				mT_g_r[i][j] = T_g_r[i][j];
 
 			}
 			std::cout<< std::endl;
-		} 
-		camera_to_robot_transform.matrix() <<  camera_to_robot_matrix[0][0], camera_to_robot_matrix[0][1], camera_to_robot_matrix[0][2],camera_to_robot_matrix[0][3],
-			  									camera_to_robot_matrix[1][0], camera_to_robot_matrix[1][1], camera_to_robot_matrix[1][2],camera_to_robot_matrix[1][3],
-			  									camera_to_robot_matrix[2][0], camera_to_robot_matrix[2][1], camera_to_robot_matrix[2][2],camera_to_robot_matrix[2][3],
+		} */
+		camera_to_robot_transform.matrix() <<  (float) camera_to_robot_matrix[0][0],(float) camera_to_robot_matrix[0][1],(float) camera_to_robot_matrix[0][2], (float) camera_to_robot_matrix[0][3],
+			  									(float) camera_to_robot_matrix[1][0], (float) camera_to_robot_matrix[1][1], (float) camera_to_robot_matrix[1][2], (float) camera_to_robot_matrix[1][3],
+			  									(float) camera_to_robot_matrix[2][0], (float) camera_to_robot_matrix[2][1], (float) camera_to_robot_matrix[2][2], (float) camera_to_robot_matrix[2][3],
 			  									0,0,0,1;
-			map_to_camera_transform = map_to_QRcode_transform * Affine3d_T_qr_r;
+			map_to_camera_transform = map_to_QRcode_transform * Affine3f_T_qr_r;
 			map_to_robot_transform = map_to_camera_transform*camera_to_robot_transform;
 				// 			std::cout<< "CAMERA:" <<std::endl;
 				// for(int i=0; i<4; i++){
@@ -252,16 +253,16 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 				// 	}
 				// 	std::cout<< std::endl;
 				// }	
-			Eigen::Quaternion end_quat(map_to_robot_transform.matrix());
-			Eigen::Translation end_position(map_to_robot_transform.translation());
-			robot_in_map_pose_RAPP.orientation.x = end_quat.x;
-			robot_in_map_pose_RAPP.orientation.y = end_quat.y;
-			robot_in_map_pose_RAPP.orientation.z = end_quat.z;
-			robot_in_map_pose_RAPP.orientation.w = end_quat.w;
+			Eigen::Quaternion<float> end_quat(map_to_robot_transform.rotation());
+			Eigen::Translation<float,3> end_position(map_to_robot_transform.translation());
+			robot_in_map_pose_RAPP.orientation.x = end_quat.x();
+			robot_in_map_pose_RAPP.orientation.y = end_quat.y();
+			robot_in_map_pose_RAPP.orientation.z = end_quat.z();
+			robot_in_map_pose_RAPP.orientation.w = end_quat.w();
 
-			robot_in_map_pose_RAPP.position.x = end_position.x;
-			robot_in_map_pose_RAPP.position.y = end_position.y;
-			robot_in_map_pose_RAPP.position.z = end_position.z;
+			robot_in_map_pose_RAPP.position.x = end_position.x();
+			robot_in_map_pose_RAPP.position.y = end_position.y();
+			robot_in_map_pose_RAPP.position.z = end_position.z();
 
 			//tf::poseEigenToMsg(map_to_robot_transform, robot_in_map_pose_ROS );
 			//robot_in_map_pose_RAPP = transform_Pose_to_RAPP(robot_in_map_pose_ROS);
@@ -271,6 +272,7 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 				std::cout << "any of detected QRcodes is stored in the QRmap";
 		
 		}
+			return robot_in_map_pose_RAPP;
 			// tf::quaternionTFToEigen(&quaternion_robot_to_QRcode)
 			// geometry_msgs::Pose QRcode_in_robot_pose;
 			// QRcode_in_robot_pose.pose.position.x = robot_to_QRcode_vectors[0][0]
@@ -295,7 +297,8 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 
 		}
 		else{
-				std::cout << "No QRcodes in passed object";
+			std::cout << "No QRcodes in passed object";
+			return robot_in_map_pose_RAPP;
 		}
 
 
