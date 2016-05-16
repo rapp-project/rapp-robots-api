@@ -44,7 +44,7 @@ public:
      * 
      * \return
      */
-    bool play_audio(const std::string & file_path, double position, double volume, double balance, bool play_in_loop); 
+    bool play_audio(const std::string & file_path, double position = 0, double volume = 1, double balance = 0, bool play_in_loop = false);
 
     /** 
      * Say given sentence in selected language
@@ -60,13 +60,12 @@ public:
      * Recognize the word included in the database
      * 
      * \param dictionary
-     * \param size
      * 
      * \return
      * 
      * \todo use vector<string> instead of string[]
      */
-    std::string word_spotting(std::string dictionary[], int size);
+    std::string word_spotting(std::vector<std::string> dictionary);
 
     /**
      * Record the audio message from the microphones by the desired time

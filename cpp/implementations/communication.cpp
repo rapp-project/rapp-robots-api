@@ -11,53 +11,59 @@ class CommunicationImpl {
 
 communication::communication(int argc, char * argv[]) : pimpl(NULL) 
 {
-	std::cout << "Initialized placeholder rapp::robot::communication library" << std::endl;
+    std::cout << "Initialized placeholder rapp::robot::communication library" << std::endl;
 }
 
 communication::~communication() 
 {
-	std::cout << "Finished placeholder rapp::robot::communication library" << std::endl;
+    std::cout << "Finished placeholder rapp::robot::communication library" << std::endl;
 }
 
 bool communication::play_audio(const std::string & file_path, double position, double volume, double balance, bool play_in_loop) 
 {
-	std::cout << "communication::playAudio: " << file_path << std::endl;
-	return false;
+    std::cout << "communication::playAudio: " << file_path << std::endl;
+    return false;
 }
 
 bool communication::text_to_speech(const std::string & str, Language language)
 {
-	std::cout << "communication::textToSpeech: " << str << std::endl;
-	return false;
+    std::cout << "communication::textToSpeech: " << str << std::endl;
+    return false;
 }
 
-std::string communication::word_spotting(std::string dictionary[], int size)
+std::string communication::word_spotting(std::vector<std::string> dictionary)
 {
-	std::cout << "communication::wordSpotting" << std::endl;
-	return "";
+    std::string ret;
+    std::cout << "communication::wordSpotting" << std::endl;
+    for (size_t i = 0; i < dictionary.size(); ++i) {
+        std::cout << i << ": " << dictionary[i] << "\n";
+    }
+    std::cout << "Enter the word: ";
+    std::cin >> ret;
+    return ret;
 }
 
 std::string communication::capture_audio(int time)
 {
-	std::cout << "communication::captureAudio" << std::endl;
-	return "";
+    std::cout << "communication::captureAudio" << std::endl;
+    return "";
 }
 
 std::string communication::capture_audio(std::string & file_path, float waiting_time, int microphone_energy)
 {
-	std::cout << "communication::captureAudio" << std::endl;
-	return "";
+    std::cout << "communication::captureAudio" << std::endl;
+    return "";
 }
 
 int communication::microphone_energy(std::string & name)
 {
-	std::cout << "communication::microphoneEnergy" << std::endl;
-	return -1;
+    std::cout << "communication::microphoneEnergy" << std::endl;
+    return -1;
 }
 
 void communication::voice_record(bool start, std::vector< std::vector<unsigned char> > & buffer)
 {
-	std::cout << "communication::voiceRecord" << std::endl;
+    std::cout << "communication::voiceRecord" << std::endl;
 }
 
 
