@@ -31,7 +31,7 @@ bool communication::text_to_speech(const std::string & str, Language language)
     return false;
 }
 
-std::string communication::word_spotting(std::vector<std::string> dictionary)
+std::string communication::word_spotting(const std::vector<std::string> & dictionary)
 {
     std::string ret;
     std::cout << "communication::wordSpotting" << std::endl;

@@ -65,7 +65,7 @@ public:
      * 
      * \todo use vector<string> instead of string[]
      */
-    std::string word_spotting(std::vector<std::string> dictionary);
+    std::string word_spotting(const std::vector<std::string> & dictionary);
 
     /**
      * Record the audio message from the microphones by the desired time
