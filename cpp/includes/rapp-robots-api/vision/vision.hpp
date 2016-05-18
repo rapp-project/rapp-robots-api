@@ -18,6 +18,21 @@ class VisionImpl;
 class vision
 {
 public:
+     enum camera_params {
+          brightness = 0,
+          contrast = 1,
+          gain = 6,
+          auto_exposure = 11,
+          auto_white_balance = 12,
+          exposure = 17
+     };
+     
+     enum camera_resolution {
+          qqvga = 0,
+          qvga = 1,
+          vga = 2,
+          vga4 = 3
+     };
 
     /**
      * Create vision module. Implementation object (pimpl) should be created here.
