@@ -11,7 +11,7 @@ import os
 
 # The upper class (namespace), containing per-functionality modules
 class RappRobot:
-    def __init__(self):
+    def __init__(self, ip = "", port = ""):
 
         self.parameters = {}
 
@@ -22,8 +22,12 @@ class RappRobot:
             self.configuration = f.readlines()
 
         # Per-device initialization to allow for flexibility
-        self.parameters["nao_ip"] = self.configuration[0].replace('\n', '')
-        self.parameters["nao_port"] = self.configuration[1].replace('\n', '')
+        if ip == "" or port == "":
+            self.parameters["nao_ip"] = self.configuration[0].replace('\n', '')
+            self.parameters["nao_port"] = self.configuration[1].replace('\n', '')
+        else:
+            self.parameters["nao_ip"] = ip
+            self.parameters["nao_port"] = port
 
         try:
           self.audio = DeviceAudio(self.parameters)
@@ -33,4 +37,5 @@ class RappRobot:
           self.vision = DeviceVision(self.parameters)
           self.utilities = Utilities(self.parameters)
         except:
-          print "rapp_robot_api: Not able to connect to proxies. Check the NAO connection"
+          print "rapp_robot_api: Not able to connect to proxies (" + str(self.parameters) + ". Check the NAO connection"
+
