@@ -37,10 +37,10 @@ public:
      * Produce Audio from robot's speakers
      * 
      * \param file_path path to the audio file
-     * \param position 
-     * \param volume
-     * \param balance
-     * \param play_in_loop
+     * \param position starting position
+     * \param volume volume level
+     * \param balance balance between the speakers
+     * \param play_in_loop flag for playing audio file in the loop
      * 
      * \return
      */
@@ -49,8 +49,8 @@ public:
     /** 
      * Say given sentence in selected language
      * 
-     * \param str
-     * \param lanugage
+     * \param str message which will be spoken
+     * \param lanugage flag of the language in which the message is given
      * 
      * \return 
      */
@@ -59,7 +59,7 @@ public:
     /**
      * Recognize the word included in the database
      * 
-     * \param dictionary
+     * \param dictionary list of short commands
      * 
      * \return
      * 
@@ -70,7 +70,7 @@ public:
     /**
      * Record the audio message from the microphones by the desired time
      * 
-     * \param time
+     * \param time recording time
      * 
      * \return
      */
@@ -79,16 +79,16 @@ public:
     /**
      * Record the audio message with silence detection
      * 
-     * \param file_path
-     * \param waiting_time
-     * \param microphone_energy
+     * \param file_path path to the audio file, which will be recorded
+     * \param waiting_time a desired waiting time in which if silence will not be broken than audio recording will be terminated
+     * \param microphone_energy minimal energy for which sillence will occur
      */
     std::string capture_audio(std::string & file_path, float waiting_time, int microphone_energy);
 
     /**
      * Return signal energy of the selected microphone
      * 
-     * \param name
+     * \param name microphone's name
      * 
      * \return
      */
@@ -98,7 +98,7 @@ public:
      * Record the audio message to the buffer 
      * 
      * \param start
-     * \param buffer
+     * \param buffer list of buffered messages
      */
     void voice_record(bool start, std::vector< std::vector<unsigned char> > & buffer);
 
