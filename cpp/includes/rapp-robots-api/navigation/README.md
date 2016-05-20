@@ -13,6 +13,7 @@ Destroy navigation module. Implementation object should be destroyed here.
 
 moveTo - initiate move to specified point given by (x,y,theta) coordinates, with respect to current NAO coordination frame.
 
+
 | Argument | Description |
 |---|---|
 |x|- X coordination of the goal point.|
@@ -25,6 +26,7 @@ call status (false - Failed, true - Success)
 #### bool rapp::robot::navigation::moveVel (float x, float y, float theta)
 
 moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta.
+
 
 | Argument | Description |
 |---|---|
@@ -48,6 +50,7 @@ call status (false - Failed, true - Success)
 
 moveJoint - move given joints/given chain to specified angle with specified maximum joints speed fraction.
 
+
 | Argument | Description |
 |---|---|
 |joint|- joints/chain names that are being requested to move.|
@@ -56,6 +59,8 @@ moveJoint - move given joints/given chain to specified angle with specified maxi
 
 Avaliable joints and chains are as follows:
 
+
+|   |   |   |   |   |   |
 |---|---|---|---|---|---|
 |The chain ...|Head|LArm|LLeg|RLeg|RArm|
 |joints ...|HeadYaw|LShoulderPitch|LHipYawPitch !!|RHipYawPitch !!|RShoulderPitch|
@@ -65,7 +70,9 @@ Avaliable joints and chains are as follows:
 |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_|LWristYaw !|LAnklePitch|RAnklePitch|RWristYaw !|
 |\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_|LHand !|RAnkleRoll|LAnkleRoll|RHand !|
 
--\> ! - these joints do not exist in the NAO Body type “H21”. -\> !! - LHipYawPitch and RHipYawPitch share the same motor so they move simultaneously and symmetrically. In case of conflicting orders, LHipYawPitch always takes the priority.
+
+*  ! - these joints do not exist in the NAO Body type “H21”. 
+*  !! - LHipYawPitch and RHipYawPitch share the same motor so they move simultaneously and symmetrically. In case of conflicting orders, LHipYawPitch always takes the priority.
 
 *Returns:*.
 call status (false - Failed, true - Success)
@@ -75,6 +82,7 @@ call status (false - Failed, true - Success)
 #### bool rapp::robot::navigation::takePredefinedPosture (std::string posture, float speed)
 
 takePredefinedPosture - Take predefined robot posture.
+
 
 | Argument | Description |
 |---|---|
@@ -87,6 +95,7 @@ call status (false - Failed, true - Success)
 #### bool rapp::robot::navigation::lookAtPoint (float x, float y, float z)
 
 lookAtPoint - Move robot to point it's main camera to a given point (x,y,z).
+
 
 | Argument | Description |
 |---|---|
@@ -101,6 +110,7 @@ call status (false - Failed, true - Success)
 
 rest - take given safe posture and remove motors stiffness. If the given posture is not safe - returns False.
 
+
 | Argument | Description |
 |---|---|
 |posture|- name of the safe posture: "Crouch","Sit","SitRelax","LyingBelly","LyingBack".|
@@ -111,6 +121,7 @@ call status (false - Failed, true - Success)
 #### bool rapp::robot::navigation::moveAlongPath (std::vector\< rapp::object::pose\_stamped \> poses)
 
 moveAlongPath - move robot along the given path. It moves with standard velocity, untill the end is reached or any obstacle was met.
+
 
 | Argument | Description |
 |---|---|
@@ -136,6 +147,7 @@ call status (false - Failed, true - Success)
 #### std::vector\<std::vector\<float\> \> rapp::robot::navigation::getTransform (std::string chainName, int space)
 
 getTransform - return homogeneous transformation matrix of given chain in the given space.
+
 | Argument | Description |
 |---|---|
 |chainName|- name of the desired chain:|
@@ -143,6 +155,8 @@ getTransform - return homogeneous transformation matrix of given chain in the gi
 
 Avaliable joints are as follows:
 
+
+|   |   |   |   |   |
 |---|---|---|---|---|
 |Head|LArm|LLeg|RLeg|RArm|
 |HeadYaw|LShoulderPitch|LHipYawPitch !!|RHipYawPitch !!|RShoulderPitch|
@@ -152,7 +166,9 @@ Avaliable joints are as follows:
 |\_\_\_\_\_\_\_\_\_|LWristYaw !|LAnklePitch|RAnklePitch|RWristYaw !|
 |\_\_\_\_\_\_\_\_\_|LHand !|RAnkleRoll|LAnkleRoll|RHand !|
 
--\> ! - these joints do not exist in the NAO Body type “H21”. -\> !! - LHipYawPitch and RHipYawPitch share the same motor so they move simultaneously and symmetrically. In case of conflicting orders, LHipYawPitch always takes the priority.
+
+*  ! - these joints do not exist in the NAO Body type “H21”. 
+*  !! - LHipYawPitch and RHipYawPitch share the same motor so they move simultaneously and symmetrically. In case of conflicting orders, LHipYawPitch always takes the priority.
 
 *Returns:*.
 homogeneous transformation matrix of given chain in the given space
