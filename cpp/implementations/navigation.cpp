@@ -66,6 +66,9 @@ bool navigation::rest(std::string posture)
 
 bool navigation::moveAlongPath(std::vector<rapp::object::pose_stamped> poses)
 {
+    for (auto p : poses) {
+        std::cout << "Go to " << p.pose.position.x << "," << p.pose.position.y << "\n";
+    }
     return true;
 }
 
