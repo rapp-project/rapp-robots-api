@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd pandoc
+cd docbook
 for f in classrapp*
 do
     echo $f
@@ -18,6 +18,6 @@ do
     | perl -pe 's|=====\r(.*?)####|=====\r\r####|g' \
     | tr '\r' '\n' \
     > ${clsn}.md
-    cp ${clsn}.md ../includes/rapp-robots-api/{clsn}/README.md
+    cp ${clsn}.md ../../includes/rapp-robots-api/${clsn}/README.md
 done
 

@@ -725,7 +725,7 @@ WARN_NO_PARAMDOC       = NO
 # FILE_VERSION_FILTER)
 # The default value is: $file:$line: $text.
 
-WARN_FORMAT            = "$file:$line: $text"
+WARN_FORMAT            = "WARN [$file:$line] $text"
 
 # The WARN_LOGFILE tag can be used to specify a file to which warning and error
 # messages should be written. If left blank the output is written to standard
@@ -743,7 +743,7 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = includes/rapp-robots-api
+INPUT                  = ../includes/rapp-robots-api
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
