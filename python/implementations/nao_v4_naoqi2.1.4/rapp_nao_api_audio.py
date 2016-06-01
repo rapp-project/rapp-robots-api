@@ -130,16 +130,16 @@ class DeviceAudio(Audio):
         if seconds <= 0.0:
             return self.ret_exc('audio.record: Negative time given')
 
-        [ret, err] = \
+        ret = \
                 self.startRecording(filename, audio_type, samplerate, channels)
-        if err != None:
-            return self.ret_exc('audio.record: ' + err)
+        if ret['error'] != None:
+            return self.ret_exc('audio.record: ' + ret['error'])
 
         time.sleep(seconds)
 
-        [ret, err] = self.stopRecording()
-        if err != None:
-            return self.ret_exc('audio.record: ' + err)
+        ret = self.stopRecording()
+        if ret['error'] != None:
+            return self.ret_exc('audio.record: ' + ret['error'])
 
         return {'error': None}
 

@@ -34,7 +34,7 @@ class DeviceVision(Vision):
     # default value.
     def capturePhoto(self, filepath, camera_id = 'front', resolution = '640x480'): 
 
-        if filepath == '' or '/' not in filepath:
+        if '/home/nao/' not in filepath:
             return self.ret_exc('vision.capturePhoto: Erroneous filepath')
 
         head, tail = os.path.split(filepath)
