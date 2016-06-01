@@ -18,7 +18,7 @@ class DeviceMotion(Motion):
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # Enables the NAO motors. The robot cannot move if its motors are not
     # enabled (a.k.a. stifness on).
@@ -29,7 +29,7 @@ class DeviceMotion(Motion):
             return self.ret_exc("motion.enableMotors: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
   
     # Disables motors (a.k.a. stifness off)
     def disableMotors(self):
@@ -39,7 +39,7 @@ class DeviceMotion(Motion):
             return self.ret_exc("motion.disableMotors: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Moves the NAO robot by velocities (all inputs are bounded to [-1,+1], where
     # +1 is the maximum positive speed and -1 is the maximum negative speed
@@ -58,7 +58,7 @@ class DeviceMotion(Motion):
             return self.ret_exc("motion.moveByVelocity: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Moves the NAO robot to the specified pose. x & y are meters, theta is
     # in radians
@@ -77,7 +77,7 @@ class DeviceMotion(Motion):
             return self.ret_exc("motion.moveTo: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Stops the NAO motion. May be a bit harsh. It is suggested to use the
     # moveByVelocity(0,0,0) instead.
@@ -88,13 +88,13 @@ class DeviceMotion(Motion):
             return self.ret_exc("motion.stop: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Returns the NAO velocities in the three axes (x,y,theta)
     def getVelocities(self):
         try:
             data = self.motion.getRobotVelocity()
-            return [data, None]
+            return {'velocities': data, 'error': None}
         except Exception as e:
             return self.ret_exc("motion.getVelocities: Unrecognized exception: " + \
                 e.message)

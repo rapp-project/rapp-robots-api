@@ -8,11 +8,11 @@ class DeviceSensors(Sensors):
         pass
 
     def getBatteryLevels(self): 
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def getSonarsMeasurements(self): 
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def getTactileMeasurements(self, wait, get_history): 
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 

@@ -16,7 +16,7 @@ class Utilities:
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # This function helps to move files from the NAO robot to a PC, in case
     # the application is remotely executed in the PC
@@ -28,7 +28,7 @@ class Utilities:
         except Exception as e:
             return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
                     e.message)
-        return [None, None]
+        return {'error': None}
 
     # This function helps to move files from the PC to a NAO robot, in case
     # the application is remotely executed in the PC
@@ -40,4 +40,4 @@ class Utilities:
         except Exception as e:
             return self.ret_exc('utilities.moveFile: Unknown exception: ' + \
                     e.message)
-        return [None, None]
+        return {'error': None}

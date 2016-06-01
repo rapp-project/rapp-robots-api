@@ -25,7 +25,7 @@ class DeviceAudio(Audio):
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # Call to make NAO dictate a string. English is the default language.
     def speak(self, text, language = 'English'):
@@ -44,7 +44,7 @@ class DeviceAudio(Audio):
             return self.ret_exc("audio.speak: Unrecognized exception: " + \
                 e.message)
         
-        return [None, None]
+        return {'error': None}
 
     # Call to make NAO start a recording. Supported audio types are wav (1-ch and
     # 4-ch) and ogg (1-ch). Default samplerate is 16kHz and default recording 
@@ -85,7 +85,7 @@ class DeviceAudio(Audio):
             return self.ret_exc("audio.startRecording: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Stops the recording. Must be called after a startRecording call.
     def stopRecording(self):
@@ -94,7 +94,7 @@ class DeviceAudio(Audio):
         except Exception as e:
             return self.ret_exc("audio.stopRecording: Unrecognized exception: " + \
                 e.message)
-        return [None, None]
+        return {'error': None}
 
     # Plays a file stored in NAO. Filanema path must be absolute.
     def playFile(self, filename):
@@ -103,7 +103,7 @@ class DeviceAudio(Audio):
         except Exception as e:
             return self.ret_exc("audio.playFile: Unrecognized exception: " + \
                 e.message)
-        return [None, None]
+        return {'error': None} 
 
     # Sets the NAO volume. The volume must be between 0 and 100, integer.
     def setVolume(self, volume):
@@ -116,7 +116,7 @@ class DeviceAudio(Audio):
             return self.ret_exc("audio.setVolume: Unrecognized exception: " + \
                 e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Performs recording. The inputs are the same as startRecording but this call
     # has the 'seconds' extra argument which must be a positive float number.
@@ -141,7 +141,7 @@ class DeviceAudio(Audio):
         if err != None:
             return self.ret_exc('audio.record: ' + err)
 
-        return [None, None]
+        return {'error': None}
 
     # Performs speech detection with the NAO engine. 
     # Vocabulary must be a list of strings
@@ -199,5 +199,9 @@ class DeviceAudio(Audio):
             return self.ret_exc('audio.speechDetection: Error in unsubscription \
                 from speech recognition: ' + e.message)
 
-        return [[word, probability], None]
+        return {
+                'error': '',
+                'word': word,
+                'probability': probability
+                }
 

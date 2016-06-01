@@ -24,13 +24,13 @@ class DeviceSensors(Sensors):
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # Returns the battery levels in percentage form
     def getBatteryLevels(self): 
         try:
             level = self.battery.getBatteryCharge()
-            return [[level], None]
+            return {'levels': [level], 'error': None}
         except Exception as e:
             return eelf.ret_exc("sensors.getBatteryCharge: Unrecognized exception: " + \
                 e.message)
@@ -48,7 +48,7 @@ class DeviceSensors(Sensors):
         data = {}
         data['front_left'] = left
         data['front_right'] = right
-        return [data, None]
+        return {'sonars': data, 'error': None}
 
     # Returns the NAO tactiles and bumpers readings. Since this is an event-based
     # call, the user must provide a delay of 'wait' seconds
@@ -160,5 +160,5 @@ class DeviceSensors(Sensors):
 
         if get_history:
             data = ret 
-        return [data, None]
+        return {'tactiles': data, 'error': None}
 

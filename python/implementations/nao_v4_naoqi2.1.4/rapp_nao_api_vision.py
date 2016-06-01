@@ -23,7 +23,7 @@ class DeviceVision(Vision):
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # Captures a photo and stores it LOCALLY in NAO.
     # The filepath must be absolute (not relative)
@@ -64,7 +64,7 @@ class DeviceVision(Vision):
             return self.ret_exc("vision.capturePhoto: Unrecognized exception: " + \
                 e.message)
 
-        return [None, "Not implemented yet"]
+        return {'error': None}
 
     #def setActiveCamera(self, camera_id):
         #cam_id = -1

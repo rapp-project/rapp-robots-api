@@ -8,4 +8,4 @@ class DeviceVision(Vision):
         pass
 
     def capturePhoto(self, filepath, camera_id, resolution): 
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}

@@ -27,7 +27,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
     # Assistive function to return errors
     def ret_exc(self, text):
         print text
-        return [None, text]
+        return {'error': text}
 
     # Sets a humanoid robot's joints. 'joints' are the names of the joints.
     # The nonmeclature used is the one of the NAO robot:
@@ -63,7 +63,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
             return self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
                     + e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Returns the joint angles of a humanoid. Again 'joints' are the joints'
     # names, which can be found here:
@@ -80,7 +80,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
             return self.ret_exc("humanoid_motion.setJointAngles: Unrecognized exception: "\
                     + e.message)
 
-        return [data, None]
+        return {'angles': data, 'error': None}
 
     # Opens a hand of a humanoid robot. The input must be 'Right' or 'Left'
     def openHand(self, hand_name):
@@ -96,7 +96,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
             return self.ret_exc("humanoid_motion.openHand: Unrecognized exception: "\
                     + e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Closes a NAO's hand. The input must be 'Right' or 'Left'
     def closeHand(self, hand_name):
@@ -109,7 +109,7 @@ class DeviceHumanoidMotion(HumanoidMotion):
         elif hand_name == "Left":
             self.motion.closeHand('LHand')
 
-        return [None, None]
+        return {'error': None}
 
     # Forces NAO to go to a predefined posture. The supported postures are here:
     # http://doc.aldebaran.com/2-1/naoqi/motion/alrobotposture.html#term-predefined-postures
@@ -128,14 +128,14 @@ class DeviceHumanoidMotion(HumanoidMotion):
             return self.ret_exc("humanoid_motion.goToPosture: Unrecognized exception: "\
                     + e.message)
 
-        return [None, None]
+        return {'error': None}
 
     # Returns the NAO's posture. If the robot has no predefined posture it will
     # return 'unknown'
     def getPosture(self):
         try:
             ans = self.posture.getPosture()
-            return [ans, None]
+            return {'posture': ans, 'error': None}
         except Exception as e:
             return self.ret_exc("humanoid_motion.getPosture: Unrecognized exception: "\
                     + e.message)

@@ -8,21 +8,21 @@ class DeviceMotion(Motion):
         pass
 
     def enableMotors(self):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
     
     def disableMotors(self):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def moveByVelocity(self, x_vel, y_vel, theta_vel):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def moveTo(self, x, y, theta):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def stop(self):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def getVelocities(self):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
 

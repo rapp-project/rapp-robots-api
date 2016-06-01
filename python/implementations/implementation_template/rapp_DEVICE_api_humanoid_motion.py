@@ -8,20 +8,20 @@ class DeviceHumanoidMotion(HumanoidMotion):
         pass
 
     def setJointAngles(self, joints, angles, speed):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def getJointAngles(self, joints):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def openHand(self, hand_name):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def closeHand(self, hand_name):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def goToPosture(self, posture, speed):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
     def getPosture(self):
-        return [None, "Not implemented yet"]
+        return {'response': '', 'error': 'Not implemented yet'}
 
