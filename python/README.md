@@ -47,7 +47,7 @@ from rapp_robot_api import RappRobot
 rh = RappRobot()
 ```
 
-Then you can invoke any of the following robot-agnostic calls. Each of these calls returns a predefined structure, being ```[data, error]```. ```data``` is call-specific, whereas the ```error``` field contains possible execution errors, or simply a message that this API call has not been implemented for a specific robot.
+Then you can invoke any of the following robot-agnostic calls. Each of these calls returns a Python dictionary.
 
 Nevertheless, since the actual robots have (or should have) their RAPP robot Python API installed, and there may be differences to each implementation (even extra functionalities), if you desire to execute applications to a single robot, please check its implementation:
 
