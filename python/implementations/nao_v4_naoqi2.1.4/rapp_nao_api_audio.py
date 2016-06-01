@@ -200,7 +200,7 @@ class DeviceAudio(Audio):
                 from speech recognition: ' + e.message)
 
         return {
-                'error': '',
+                'error': None,
                 'word': word,
                 'probability': probability
                 }
