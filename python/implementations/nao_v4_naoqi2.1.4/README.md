@@ -49,7 +49,7 @@ Since the NAO applications can be remotely executed and the API calls producing 
 - ```pc_file```: A string containing the target path in the PC
 
 **Example input**: ```rh.utilities.moveFileToPC("/home/nao/img.jpg", "~/temp/test.jpg")```
-**Call Output**: ```[None,None]```
+**Call Output**: ```{'error': None}```
 **Expected Output**: The file is transferred from the NAO to the PC
 
 ***
@@ -63,5 +63,5 @@ Since the NAO applications can be remotely executed and the API calls producing 
 - ```pc_file```: A string containing the path of the file to be transferred in the PC
 
 **Example input**: ```rh.utilities.moveFileToNAO("/home/nao/img.jpg", "~/temp/test.jpg")```
-**Call Output**: ```[None,None]```
+**Call Output**: ```{'error': None}```
 **Expected Output**: The file is transferred from the PC to the NAO
