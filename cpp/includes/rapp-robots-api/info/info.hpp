@@ -44,7 +44,7 @@ public:
         return base_path_ + relative_path;
     }
 
-priviate:
+private:
     /**
      * Default contructor removed 
      */
