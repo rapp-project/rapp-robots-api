@@ -17,7 +17,7 @@ MACRO(BUILD_LIB LIB_NAME)
         )
 
         target_link_libraries(${LIB}
-            ${RAPP_SHARED_NAME}
+            ${RAPP_SHARED_NAME} ${Boost_LIBRARIES}
         )
 
         install (TARGETS ${LIB} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/)

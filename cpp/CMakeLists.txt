@@ -23,7 +23,7 @@ include_directories(${RAPP_INCLUDE_DIRS})
 # Find PThreads (needed by Boost)
 find_package(Threads REQUIRED)
 # Find Boost
-find_package( Boost 1.49 COMPONENTS system thread random unit_test_framework program_options REQUIRED )
+find_package( Boost 1.49 COMPONENTS system thread filesystem random unit_test_framework program_options REQUIRED )
 
 # Find OpenCV 2.0
 #find_package( OpenCV REQUIRED )
