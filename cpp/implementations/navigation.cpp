@@ -19,42 +19,42 @@ navigation::~navigation()
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
 
-bool navigation::moveTo(float x, float y, float theta)
+bool navigation::move_to(float x, float y, float theta)
 {
     return true;
 }
 
-bool navigation::moveVel(float x, float y, float theta)
+bool navigation::move_vel(float x, float y, float theta)
 {
     return true;
 }
 
-bool navigation::moveVel(float x, float theta)
+bool navigation::move_vel(float x, float theta)
 {
     return true;
 }
 
-bool navigation::moveStop()
+bool navigation::move_stop()
 {
     return true;
 }
 
-bool navigation::moveJoint(std::vector<std::string> joint, std::vector<float> angle, float speed)
+bool navigation::move_joint(std::vector<std::string> joint, std::vector<float> angle, float speed)
 {
     return true;
 }
 
-bool navigation::moveJoint(std::vector<std::string> joint, std::vector<float> angle)
+bool navigation::move_joint(std::vector<std::string> joint, std::vector<float> angle)
 {
     return true;
 }
 
-bool navigation::takePredefinedPosture(std::string posture, float speed)
+bool navigation::take_predefined_posture(std::string posture, float speed)
 {
     return true;
 }
 
-bool navigation::lookAtPoint(float x, float y, float z)\
+bool navigation::look_at_point(float x, float y, float z)\
 {
     return true;
 }
@@ -64,7 +64,7 @@ bool navigation::rest(std::string posture)
     return true;
 }
 
-bool navigation::moveAlongPath(std::vector<rapp::object::pose_stamped> poses)
+bool navigation::move_along_path(std::vector<rapp::object::pose_stamped> poses)
 {
     for (auto p : poses) {
         std::cout << "Go to " << p.pose.position.x << "," << p.pose.position.y << "\n";
@@ -72,17 +72,17 @@ bool navigation::moveAlongPath(std::vector<rapp::object::pose_stamped> poses)
     return true;
 }
 
-rapp::object::pose_stamped navigation::getRobotPose()
+rapp::object::pose_stamped navigation::get_global_pose()
 {
     return rapp::object::pose_stamped();
 }
 
-bool navigation::setGlobalPose(rapp::object::pose rapp_pose)
+bool navigation::set_global_pose(rapp::object::pose rapp_pose)
 {
     return true;
 }
 
-std::vector<std::vector<float>> navigation::getTransform(std::string chainName, int space)
+std::vector<std::vector<float>> navigation::get_transform(std::string chainName, int space)
 {
     return std::vector<std::vector<float>>();
 }

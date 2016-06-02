@@ -37,7 +37,7 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // This is a BLOCKING CALL.
-    bool moveTo(float x, float y, float theta);
+    bool move_to(float x, float y, float theta);
     /**
      * moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta.
      *
@@ -48,9 +48,9 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // this is NOT a BLOCKING CALL.
-    bool moveVel(float x, float y, float theta);
+    bool move_vel(float x, float y, float theta);
     // version for non-holonomic
-    bool moveVel(float x, float theta);
+    bool move_vel(float x, float theta);
 
     /**
      * moveStop - Stop robot movement - movement initiated by moveTo, moveVel and moveAlongPath methods.
@@ -59,7 +59,7 @@ class navigation
      */
 
     // this is NOT a BLOCKING CALL.
-    bool moveStop();
+    bool move_stop();
     /**
      * moveJoint - move given joints/given chain to specified angle with specified maximum joints speed fraction.
      *
@@ -86,8 +86,8 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // this is a BLOCKING CALL.
-    bool moveJoint(std::vector<std::string> joint, std::vector<float> angle, float speed);
-    bool moveJoint(std::vector<std::string> joint, std::vector<float> angle);
+    bool move_joint(std::vector<std::string> joint, std::vector<float> angle, float speed);
+    bool move_joint(std::vector<std::string> joint, std::vector<float> angle);
      /**
      * takePredefinedPosture - Take predefined robot posture. 
      *
@@ -97,7 +97,7 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // this is a BLOCKING CALL.
-    bool takePredefinedPosture(std::string posture, float speed);
+    bool take_predefined_posture(std::string posture, float speed);
     /**
      * lookAtPoint - Move robot to point it's main camera to a given point (x,y,z).
      *
@@ -108,7 +108,7 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // this is a BLOCKING CALL. 
-    bool lookAtPoint(float x, float y, float z);
+    bool look_at_point(float x, float y, float z);
     /**
      * rest - take given safe posture and remove motors stiffness. If the given posture is not safe - returns False.
      *
@@ -126,7 +126,7 @@ class navigation
      * @return call status (false - Failed, true - Success)
      */
     // This is a BLOCKING CALL
-    bool moveAlongPath(std::vector<rapp::object::pose_stamped> poses);
+    bool move_along_path(std::vector<rapp::object::pose_stamped> poses);
     /**
      * getRobotPose - returns robot pose given in the global frame.
      *
@@ -134,14 +134,14 @@ class navigation
      * @return current robot pose in the global frame.
      */
     // getRobotPose - returns robot pose given in the map frame.
-    rapp::object::pose_stamped getRobotPose();
+    rapp::object::pose_stamped get_global_pose();
     /**
      * setGlobalPose - sets new robot pose in the global frame. Usually is used to set new robots pose that was estimated by one of global localization methods (e.g. QR-localization).
      *
      *
      * @return call status (false - Failed, true - Success)
      */
-    bool setGlobalPose(rapp::object::pose rapp_pose);
+    bool set_global_pose(rapp::object::pose rapp_pose);
     /**
      * @brief getTransform - return homogeneous transformation matrix of given chain in the given space.
      *
@@ -163,7 +163,7 @@ class navigation
      *
      * @return homogeneous transformation matrix of given chain in the given space
      */
-    std::vector<std::vector<float>> getTransform(std::string chainName, int space);   
+    std::vector<std::vector<float>> get_transform(std::string chainName, int space);   
   private:
     NavigationImpl * pimpl;
 };

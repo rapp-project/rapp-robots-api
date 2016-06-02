@@ -34,7 +34,7 @@ namespace robot {
 	return pose;
 }
 
-        rapp::object::pose localization::qrCodeLocalization(rapp::object::qr_code_3d QRcodes, std::vector<std::vector<float>> camera_to_robot_matrix,rapp::object::qr_code_map QRmap)
+        rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes, std::vector<std::vector<float>> camera_to_robot_matrix,rapp::object::qr_code_map QRmap)
 {
 	rapp::object::pose pose;
 	return pose;
