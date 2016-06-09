@@ -27,91 +27,6 @@ namespace robot {
 {
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
-
-	rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, const char* MapPath)
-{
-	rapp::object::pose pose;
-	return pose;
-}
-
-        rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes, std::vector<std::vector<float>> camera_to_robot_matrix,rapp::object::qr_code_map QRmap)
-{
-	rapp::object::pose pose;
-	return pose;
-}
-	rapp::object::qr_code_map localization::load_qr_code_map(std::istream & MapPath)
-{
-	boost::property_tree::ptree pt;
-	boost::property_tree::xml_parser::read_xml(MapPath, pt);
-	rapp::object::pose pose;
-	rapp::object::qr_code_map qr_map;
-	qr_map.labels.clear();
-	qr_map.poses.clear();
-	BOOST_FOREACH( boost::property_tree::ptree::value_type const& v, pt.get_child("QRcodes") ) {
-        if( v.first == "QR" ) {
-		pose.position.x = v.second.get<float>("x");
-		pose.position.y = v.second.get<float>("y");
-		pose.position.z = v.second.get<float>("z");
-		pose.orientation.x = v.second.get<float>("ox");
-		pose.orientation.y = v.second.get<float>("oy");
-		pose.orientation.z = v.second.get<float>("oz");
-		pose.orientation.w = v.second.get<float>("ow");
-		qr_map.poses.push_back(pose);
-		qr_map.labels.push_back(v.second.get<std::string>("label"));
-        }
-	}
-
-	return qr_map;
-}
-std::vector<std::vector<double>> MatrixMul(std::vector<std::vector<double>> vectorsA, std::vector<std::vector<double>> vectorsB ,  int size)
-{
-	double matrixA[size][size];
-	double matrixB[size][size];
-	double matrixC[size][size];
-	std::vector<std::vector<double>> vectorsC;
-	vectorsC.clear();
-std::vector<double> row;
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size;j++){
-				matrixA[i][j] = vectorsA[i][j];
-				matrixB[i][j] = vectorsB[i][j];
-
-			}
-		}	
-	
-    int i, j, k;
-
-    for(i=0; i<size; i++)                                      // liczy wiersze 
-    for(j=0; j<size; j++)                                      // liczy kolumny
-    matrixC[i][j]=0;   
-		
-
-    for(i=0; i<size; i++)
-    for(j=0; j<size; j++)
-    for(k=0; k<size; k++)
-    matrixC[i][j] += matrixA[i][k] * matrixB[k][j]; 
-
-	row.clear();
-	for(int i=0; i<size; i++){
-		for(int j=0; j<size;j++){
-					
-			row.push_back(matrixC[i][j]);
-		}
-			vectorsC.push_back(row);
-			row.clear();
-	}		
-
-	// std::cout<< "rozmieszczanie:" <<std::endl;
-	// 			std::cout<< "vectorC:" <<std::endl;
-	// 	for(int i=0; i<size; i++){
-	// 		for(int j=0; j<size;j++){
-	// 			std::cout<< vectorsC[i][j] << "  ";
-	// 		}
-	// 		std::cout<< std::endl;
-	// 	}	
-		return vectorsC;
-}
-
 	rapp::object::pose getRobotPoseFromQRcodeMap(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, rapp::object::qr_code_map QRmap){
 		rapp::object::pose robot_in_map_pose_RAPP;
 
@@ -303,6 +218,55 @@ map.poses[mapped_qrcode_ordinal_nr].orientation.x,QRmap.poses[mapped_qrcode_ordi
 
 
 	}
+	std::vector<std::vector<double>> MatrixMul(std::vector<std::vector<double>> vectorsA, std::vector<std::vector<double>> vectorsB ,  int size)
+{
+	double matrixA[size][size];
+	double matrixB[size][size];
+	double matrixC[size][size];
+	std::vector<std::vector<double>> vectorsC;
+	vectorsC.clear();
+std::vector<double> row;
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size;j++){
+				matrixA[i][j] = vectorsA[i][j];
+				matrixB[i][j] = vectorsB[i][j];
+
+			}
+		}	
+	
+    int i, j, k;
+
+    for(i=0; i<size; i++)                                      // liczy wiersze 
+    for(j=0; j<size; j++)                                      // liczy kolumny
+    matrixC[i][j]=0;   
+		
+
+    for(i=0; i<size; i++)
+    for(j=0; j<size; j++)
+    for(k=0; k<size; k++)
+    matrixC[i][j] += matrixA[i][k] * matrixB[k][j]; 
+
+	row.clear();
+	for(int i=0; i<size; i++){
+		for(int j=0; j<size;j++){
+					
+			row.push_back(matrixC[i][j]);
+		}
+			vectorsC.push_back(row);
+			row.clear();
+	}		
+
+	// std::cout<< "rozmieszczanie:" <<std::endl;
+	// 			std::cout<< "vectorC:" <<std::endl;
+	// 	for(int i=0; i<size; i++){
+	// 		for(int j=0; j<size;j++){
+	// 			std::cout<< vectorsC[i][j] << "  ";
+	// 		}
+	// 		std::cout<< std::endl;
+	// 	}	
+		return vectorsC;
+}
+
 std::vector<std::vector<double>> computeMatricFromPose(double x,double y,double z,double ox,double oy,double oz){
 		
 		/*
@@ -411,6 +375,52 @@ R_c_g=MatrixMul(ZY, X_c_g,  3);
 		return T_c_g;
 
 	}
+
+	rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, std::istream *MapPath)
+{
+		rapp::object::qr_code_map QRmap = localization::load_qr_code_map(MapPath);
+  		rapp::object::pose pose;
+		pose = getRobotPoseFromQRcodeMap(QRcodes, camera_to_robot_matrix, QRmap);
+  		return pose;
+}
+
+        rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes, std::vector<std::vector<float>> camera_to_robot_matrix,rapp::object::qr_code_map QRmap)
+{
+  		rapp::object::pose pose;
+		pose = getRobotPoseFromQRcodeMap(QRcodes, camera_to_robot_matrix, QRmap);
+  		return pose;
+}
+	rapp::object::qr_code_map localization::load_qr_code_map(std::istream *MapPath)
+{
+ 	std::ostringstream oss;
+  	oss << MapPath->rdbuf();
+  	std::string strConst = oss.str();
+  	const char* pStr = strConst.c_str();
+	boost::property_tree::ptree pt;
+	boost::property_tree::xml_parser::read_xml(pStr, pt);
+	rapp::object::pose pose;
+	rapp::object::qr_code_map qr_map;
+	qr_map.labels.clear();
+	qr_map.poses.clear();
+	BOOST_FOREACH( boost::property_tree::ptree::value_type const& v, pt.get_child("QRcodes") ) {
+        if( v.first == "QR" ) {
+		pose.position.x = v.second.get<float>("x");
+		pose.position.y = v.second.get<float>("y");
+		pose.position.z = v.second.get<float>("z");
+		pose.orientation.x = v.second.get<float>("ox");
+		pose.orientation.y = v.second.get<float>("oy");
+		pose.orientation.z = v.second.get<float>("oz");
+		pose.orientation.w = v.second.get<float>("ow");
+		qr_map.poses.push_back(pose);
+		qr_map.labels.push_back(v.second.get<std::string>("label"));
+        }
+	}
+
+	return qr_map;
+}
+
+
+
 
 } /* namespace robot */
 } /* namespace rapp */

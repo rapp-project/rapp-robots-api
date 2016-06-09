@@ -18,11 +18,11 @@ class localization
   	localization(int argc=0, char ** argv = NULL);
 
     ~localization();
-	rapp::object::pose qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, const char* MapPath);
+	rapp::object::pose qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, std::istream *MapPath);
 
         rapp::object::pose qr_code_localization(rapp::object::qr_code_3d QRcodes, std::vector<std::vector<float>> camera_to_robot_matrix,rapp::object::qr_code_map QRmap);
 
-	rapp::object::qr_code_map load_qr_code_map(std::istream & is);
+	rapp::object::qr_code_map load_qr_code_map(std::istream * is);
 
   private:
 };
