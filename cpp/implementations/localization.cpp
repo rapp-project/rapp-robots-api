@@ -392,10 +392,6 @@ R_c_g=MatrixMul(ZY, X_c_g,  3);
 }
 	rapp::object::qr_code_map localization::load_qr_code_map(std::string *MapPath)
 {
- 	std::ostringstream oss;
-  	oss << MapPath->rdbuf();
-  	std::string strConst = oss.str();
-  	const char* pStr = strConst.c_str();
 	boost::property_tree::ptree pt;
 	boost::property_tree::xml_parser::read_xml(*MapPath, pt);
 	rapp::object::pose pose;
