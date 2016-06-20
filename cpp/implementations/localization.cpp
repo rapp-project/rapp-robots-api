@@ -390,14 +390,14 @@ R_c_g=MatrixMul(ZY, X_c_g,  3);
 		pose = getRobotPoseFromQRcodeMap(QRcodes, camera_to_robot_matrix, QRmap);
   		return pose;
 }
-	rapp::object::qr_code_map localization::load_qr_code_map(std::istream *MapPath)
+	rapp::object::qr_code_map localization::load_qr_code_map(std::string *MapPath)
 {
  	std::ostringstream oss;
   	oss << MapPath->rdbuf();
   	std::string strConst = oss.str();
   	const char* pStr = strConst.c_str();
 	boost::property_tree::ptree pt;
-	boost::property_tree::xml_parser::read_xml(pStr, pt);
+	boost::property_tree::xml_parser::read_xml(*MapPath, pt);
 	rapp::object::pose pose;
 	rapp::object::qr_code_map qr_map;
 	qr_map.labels.clear();
