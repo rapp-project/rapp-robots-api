@@ -27,10 +27,13 @@ find_package( Boost 1.49 COMPONENTS system thread filesystem random unit_test_fr
 
 # Find OpenCV 2.0
 #find_package( OpenCV REQUIRED )
-
-
-
-
+if (ROBOT_ARCH_TYPE STREQUAL "Nao")
+    set(ROBOT_ARCH_TYPE atom)
+    message(STATUS "Setting ROBOT_ARCH_TYPE - atom")
+else()
+    set(ROBOT_ARCH_TYPE native)
+    message(STATUS "Setting ROBOT_ARCH_TYPE - native")
+endif()
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK) 
 set(CMAKE_COLOR_MAKEFILE on)
 set(CMAKE_VERBOSE_MAKEFILE off)
@@ -63,7 +66,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
         set(CMAKE_EXE_LINKER_FLAGS "-lc++ -lcxxrt")
         set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=gnu++11 -Wall -fPIC -static-libstdc++ -m32")
     endif()
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=native -march=native")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=${ROBOT_ARCH_TYPE} -march=${ROBOT_ARCH_TYPE}")
     set(BUILD_SHARED_LIBS OFF)
     message(STATUS "CXX Flags: " ${CMAKE_CXX_FLAGS})
     message(STATUS "CXX Linker: " ${CMAKE_EXE_LINKER_FLAGS})
@@ -79,7 +82,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
         set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -Wall")
         message(STATUS "CXX Flags: " ${CMAKE_CXX_FLAGS})
         set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
-        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=native -march=native")
+        set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -mtune=${ROBOT_ARCH_TYPE} -march=${ROBOT_ARCH_TYPE}")
         set(BUILD_SHARED_LIBS OFF)
         message(STATUS "CXX Linker: " ${CMAKE_EXE_LINKER_FLAGS})
 # Intel Compiler May run on Linux - Maybe we should support it
