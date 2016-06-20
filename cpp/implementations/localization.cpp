@@ -376,7 +376,7 @@ R_c_g=MatrixMul(ZY, X_c_g,  3);
 
 	}
 
-	rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, std::istream *MapPath)
+    rapp::object::pose localization::qr_code_localization(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, std::string *MapPath)
 {
 		rapp::object::qr_code_map QRmap = localization::load_qr_code_map(MapPath);
   		rapp::object::pose pose;
