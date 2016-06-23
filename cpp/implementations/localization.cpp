@@ -14,6 +14,7 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
+
 namespace rapp {
 namespace robot {
 
@@ -53,7 +54,6 @@ namespace robot {
 			}
 			//check if any of detected QRcodes is stored in the QRmap
 			if (mapped_qrcode_ordinal_nr != -1){
-
 			// compute transformation matrix from map origin to detected QRcode using QRcodeMap
 			//geometry_msgs::Pose QRcode_ROS_pose;
 			//Eigen::Affine3f map_to_QRcode_transform; 
@@ -65,8 +65,13 @@ namespace robot {
 			//Eigen::Matrix3d rotationMatrix = q.matrix();
 
 			Eigen::Translation<float,3> map_to_qr_code_translation;
+			map_to_qr_code_translation.x() = QRmap.poses[mapped_qrcode_ordinal_nr].position.x;
+			map_to_qr_code_translation.y() = QRmap.poses[mapped_qrcode_ordinal_nr].position.y;
+			map_to_qr_code_translation.z() = QRmap.poses[mapped_qrcode_ordinal_nr].position.z;
+
 			Eigen::Transform<float,3,Eigen::Affine>  map_to_QRcode_transform= Eigen::Transform<float,3,Eigen::Affine>::Identity();
 			map_to_QRcode_transform = map_to_qr_code_quaternion*map_to_qr_code_translation;
+
 			//map_to_QRcode_transform.rotate(map_to_qr_code_quaternion);
 			/*
 			 tf::Quaternion q(QR
