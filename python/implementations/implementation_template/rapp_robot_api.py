@@ -12,7 +12,7 @@ class RappRobot:
 
         self.parameters = {}
 
-        self.audio = DeviceAudio(self.arameters)
+        self.audio = DeviceAudio(self.parameters)
         self.motion = DeviceMotion(self.parameters)
         self.sensors = DeviceSensors(self.parameters)
         self.humanoid_motion = DeviceHumanoidMotion(self.parameters)
