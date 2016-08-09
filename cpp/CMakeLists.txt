@@ -19,6 +19,7 @@ cmake_minimum_required(VERSION 2.8)
 find_package(Rapp REQUIRED)
 MESSAGE(STATUS ${RAPP_INCLUDE_DIRS})
 include_directories(${RAPP_INCLUDE_DIRS})
+include_directories(${RAPP_INCLUDE_DIRS}/rapp)
 
 # Find PThreads (needed by Boost)
 find_package(Threads REQUIRED)

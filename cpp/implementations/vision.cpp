@@ -58,7 +58,7 @@ rapp::object::picture::Ptr vision::capture_image (int camera_id, int camera_reso
         std::cout << "Type: " << pic->type() << "\n";
         return pic;
     } else {
-        rapp::types::byte bytes[2] = {0x89, 0x50};
+        rapp::types::byte bytes[2] = {(char) 0x89, (char) 0x50};
         return std::make_shared<rapp::object::picture>(std::vector<rapp::types::byte>(bytes, bytes+2));
     }
 }
