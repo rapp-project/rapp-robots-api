@@ -75,7 +75,7 @@ std::map<int, bool> vision::set_camera_params(int camera_id, const std::map<int,
     return std::map<int, bool>();
 }
 
-rapp::object::qr_code_3d qr_code_detection(rapp::object::picture image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size)
+rapp::object::qr_code_3d vision::qr_code_detection(rapp::object::picture::Ptr image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size)
 {
     return rapp::object::qr_code_3d();
 }
