@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import time
 
@@ -27,19 +28,26 @@ class DeviceAudio(Audio):
         print text
         return {'error': text}
 
-    # Call to make NAO dictate a string. English is the default language.
-    def speak(self, text, language = 'English'):
-        # Sanity conversion
-        _text = str(text)
+    def speak(self, text, language='English'):
+        """
+        Call to make NAO dictate a string. English is the default language.
 
+        """
+        if language in ['en', 'En', 'EN']:
+            language = 'English'
+        elif language in ['el', 'gr', 'Gr', 'GR']:
+            language = 'Greek'
         # Check for supported languages
-        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',\
-                'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
+        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',
+                     'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
         if language not in supp_lang:
             return self.ret_exc('audio.speak: Unsupported language')
+        # If text is of type unicode, encode to utf8
+        if isinstance(text, unicode):
+            text = text.encode('utf8')
         try:
             self.tts.setLanguage(language)
-            self.tts.say(_text)
+            self.tts.say(text)
         except Exception as e:
             return self.ret_exc("audio.speak: Unrecognized exception: " + \
                 e.message)
