@@ -194,3 +194,19 @@ class DeviceSensors(Sensors):
             self.ret_exc("sensors.rastaLedsOff: {0}".format(e.message))
         else:
             return 1
+
+    def randomEyesOn(self, duration=10):
+        try:
+            self.leds.post.randomEyes(duration)
+        except Exception as e:
+            self.ret_exc("sensors.randomEyesOn: {0}".format(e.message))
+        else:
+            return 1
+
+    def randomEyesOff(self, taskId):
+        try:
+            self.leds.stop(taskId)
+        except Exception as e:
+            self.ret_exc("sensors.randomEyesOff: {0}".format(e.message))
+        else:
+            return 1
