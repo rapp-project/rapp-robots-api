@@ -44,10 +44,12 @@ class DeviceAudio(Audio):
             return self.ret_exc('audio.speak: Unsupported language')
         # If text is of type unicode, encode to utf8
         if isinstance(text, unicode):
-            text = text.encode('utf8')
+            _text = text.encode('utf8')
+        else:
+            _text = text
         try:
             self.tts.setLanguage(language)
-            self.tts.say(text)
+            self.tts.say(_text)
         except Exception as e:
             return self.ret_exc("audio.speak: Unrecognized exception: " + \
                 e.message)
@@ -151,11 +153,11 @@ class DeviceAudio(Audio):
 
         return {'error': None}
 
-    # Performs speech detection with the NAO engine. 
+    # Performs speech detection with the NAO engine.
     # Vocabulary must be a list of strings
     # Since this is an event-based call, it waits 'wait' seconds for input
     # The default language is English
-    def speechDetection(self, vocabulary, wait, language = "English"):
+    def speechDetection(self, vocabulary, wait, language="English"):
 
         # Sanity checks
         if type(vocabulary) is not list:
@@ -165,10 +167,26 @@ class DeviceAudio(Audio):
         if wait <= 0:
             return self.ret_exc('audio.speechDetection: Wait param negative value')
 
+        if language in ['en', 'En', 'EN']:
+            language = 'English'
+        elif language in ['el', 'gr', 'Gr', 'GR']:
+            language = 'Greek'
+        # Check for supported languages
+        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',
+                     'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
+        if language not in supp_lang:
+            return self.ret_exc('audio.speak: Unsupported language')
+
+        _vocabulary = []
+        for idx, w in enumerate(vocabulary):
+            if isinstance(w, unicode):
+                _vocabulary.append(w.encode('utf8'))
+            else:
+                _vocabulary.append(w)
         # Setting language and activating the speech recognition
         try:
             self.speech_recog.setLanguage(language)
-            self.speech_recog.setVocabulary(vocabulary, False)
+            self.speech_recog.setVocabulary(_vocabulary, False)
         except Exception as e:
             return self.ret_exc("audio.speechDetection: Unrecognized exception: " + \
                 e.message)
@@ -187,7 +205,7 @@ class DeviceAudio(Audio):
                 time.sleep(0.1)
                 iterations -= 1
         except Exception as e:
-            
+
             self.speech_recog.unsubscribe("rapp_speech_rec")
             return self.ret_exc('audio.speechDetection: Something wrong with \
                 NAO memory proxy: ' + e.message)
@@ -208,8 +226,7 @@ class DeviceAudio(Audio):
                 from speech recognition: ' + e.message)
 
         return {
-                'error': None,
-                'word': word,
-                'probability': probability
-                }
-
+            'error': None,
+            'word': word,
+            'probability': probability
+        }
