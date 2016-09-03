@@ -17,6 +17,8 @@ class DeviceAudio(Audio):
 
         # Intializing NAOQi proxies
         self.tts = ALProxy("ALTextToSpeech", self.nao_ip, self.nao_port)
+        self.tts_animated = ALProxy("ALAnimatedSpeech", self.nao_ip,
+                                    self.nao_port)
         self.audio_rec = ALProxy("ALAudioRecorder", self.nao_ip, self.nao_port)
         self.audio_player = ALProxy("ALAudioPlayer", self.nao_ip, self.nao_port)
         self.audio_device = ALProxy("ALAudioDevice", self.nao_ip, self.nao_port)
@@ -28,7 +30,7 @@ class DeviceAudio(Audio):
         print text
         return {'error': text}
 
-    def speak(self, text, language='English'):
+    def speak(self, text, language='English', animated=False):
         """
         Call to make NAO dictate a string. English is the default language.
 
@@ -49,7 +51,11 @@ class DeviceAudio(Audio):
             _text = text
         try:
             self.tts.setLanguage(language)
-            self.tts.say(_text)
+            if animated:
+                self.tts_animated.say(_text,
+                                      {"bodyLanguageMode": "contextual"})
+            else:
+                self.tts.say(_text)
         except Exception as e:
             return self.ret_exc("audio.speak: Unrecognized exception: " + \
                 e.message)
