@@ -60,7 +60,7 @@ namespace robot {
 
 
 			// // ... NEW APPROACH
-
+Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");
 			Eigen::Quaternion<float> map_to_qr_code_quaternion(QRmap.poses[mapped_qrcode_ordinal_nr].orientation.w, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.x, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.y, QRmap.poses[mapped_qrcode_ordinal_nr].orientation.z);
 			//Eigen::Matrix3d rotationMatrix = q.matrix();
 
@@ -70,7 +70,9 @@ namespace robot {
 			map_to_qr_code_translation.z() = QRmap.poses[mapped_qrcode_ordinal_nr].position.z;
 
 			Eigen::Transform<float,3,Eigen::Affine>  map_to_QRcode_transform= Eigen::Transform<float,3,Eigen::Affine>::Identity();
-			map_to_QRcode_transform = map_to_qr_code_quaternion*map_to_qr_code_translation;
+			map_to_QRcode_transform = map_to_qr_code_translation*map_to_qr_code_quaternion;
+
+std::cout<<"map to QRcode matrix: \n"<<map_to_QRcode_transform.matrix().format(OctaveFmt)<<std::endl;
 
 			//map_to_QRcode_transform.rotate(map_to_qr_code_quaternion);
 			/*
