@@ -28,6 +28,18 @@ class navigation
      */
     ~navigation();
         /**
+     * point_arm - move NAO arm to point its fingers to the reqested point given in the global coordinate frame.
+     *
+     * @param x - X coordination of the requested point.
+     * @param y - Y coordination of the requested point.
+     * @param z - z coordination of the requested point.
+     *
+     * @return call status (false - Failed, true - Success)
+     */
+    // This is a BLOCKING CALL.
+    bool point_arm(float x, float y, float z);
+
+        /**
      * moveTo - initiate move to specified point given by (x,y,theta) coordinates, with respect to current NAO coordination frame.
      *
      * @param x - X coordination of the goal point.

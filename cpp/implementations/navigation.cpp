@@ -19,6 +19,11 @@ navigation::~navigation()
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
 
+bool navigation::point_arm(float x, float y, float z)
+{
+    return true;
+}
+
 bool navigation::move_to(float x, float y, float theta)
 {
     return true;
