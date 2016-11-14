@@ -18,6 +18,18 @@ class VisionImpl;
 class vision
 {
 public:
+    /**
+     * Intrinsic camera info (calibration data)
+     */
+    struct camera_info {
+        /// camera matrix
+	std::vector<float> K;
+	/// distortion coeffs
+	std::vector<float> D;
+	/// projection matrix
+	std::vector<float> P;
+    };
+
      enum camera_params {
           brightness = 0,
           contrast = 1,
@@ -101,6 +113,14 @@ public:
      * \return QR-codes informations
      */
     rapp::object::qr_code_3d qr_code_detection(rapp::object::picture::Ptr image, std::vector<std::vector<float>> robot_to_camera_matrix, double camera_matrix[][3], float landmark_theoretical_size = 0.16f);
+
+    /**
+     * Load camera calibration info for selected camera.
+     * If no calibration data is present, default values are returned.
+     *
+     * \param camera_id selected camera id
+     */
+    camera_info load_camera_info(int camera_id);
 
 private:
     /**

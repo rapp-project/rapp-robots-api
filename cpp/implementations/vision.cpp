@@ -80,5 +80,10 @@ rapp::object::qr_code_3d vision::qr_code_detection(rapp::object::picture::Ptr im
     return rapp::object::qr_code_3d();
 }
 
+vision::camera_info vision::load_camera_info(int camera_id) {
+	vision::camera_info ret;
+	return ret;
+}
+
 } /* namespace robot */
 } /* namespace rapp */
