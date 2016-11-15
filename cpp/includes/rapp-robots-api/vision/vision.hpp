@@ -122,6 +122,14 @@ public:
      */
     camera_info load_camera_info(int camera_id);
 
+    /**
+     * Save camera info for selected camera in persistend storage
+     *
+     * \param camera_id selected caemra id
+     * \param info new camera parameters to be stored
+     */
+    void save_camera_info(int camera_id, camera_info info);
+
 private:
     /**
      * Pointer to implementation class. 

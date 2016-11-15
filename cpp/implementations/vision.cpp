@@ -85,5 +85,9 @@ vision::camera_info vision::load_camera_info(int camera_id) {
 	return ret;
 }
 
+void vision::save_camera_info(int camera_id, vision::camera_info info) {
+	
+}
+
 } /* namespace robot */
 } /* namespace rapp */
