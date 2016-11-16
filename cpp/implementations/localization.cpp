@@ -28,6 +28,44 @@ namespace robot {
 {
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
+	void localization::multiplyPoses(rapp::object::pose &pose1, rapp::object::pose &pose2, rapp::object::pose &end_pose)
+    {
+        Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");
+        Eigen::Matrix4f Trans1;
+        Eigen::Matrix4f Trans2;
+        Eigen::Matrix4f Trans3;
+        Eigen::Quaternion<float> q1(pose1.orientation.w, pose1.orientation.x, pose1.orientation.y, pose1.orientation.z);
+        Eigen::Matrix3f orient1 = q1.toRotationMatrix();
+        Eigen::Quaternion<float> q2(pose2.orientation.w, pose2.orientation.x, pose2.orientation.y, pose2.orientation.z);
+        Eigen::Matrix3f orient2 = q2.toRotationMatrix();
+        Eigen::Vector3f t1(pose1.position.x, pose1.position.y, pose1.position.z);
+        Eigen::Vector3f t2(pose2.position.x, pose2.position.y, pose2.position.z);
+        Trans1.setIdentity();
+        Trans2.setIdentity();
+        Trans1.block<3,3>(0,0) = orient1;
+        Trans1.rightCols<1>().head(3) = t1;
+        std::cout << "pose_1: \n"<<Trans1.format(OctaveFmt) << std::endl;
+
+        Trans2.block<3,3>(0,0) = orient2;
+        Trans2.rightCols<1>().head(3) = t2;
+         std::cout << "pose_2: \n"<<Trans2.format(OctaveFmt) << std::endl;
+       
+        Trans3 = Trans1*Trans2;
+        std::cout << "multipl_result_pose: \n"<<Trans3.format(OctaveFmt) << std::endl;
+        Eigen::Matrix3f mat_rot3 = Trans3.block<3,3>(0,0);
+        Eigen::Quaternion<float> q3(mat_rot3);
+        Eigen::Vector4f t3;
+        t3 = Trans3.rightCols<1>();
+        end_pose.position.x = t3(0);
+        end_pose.position.y = t3(1);
+        end_pose.position.z = t3(2);
+        end_pose.orientation.x = q3.x();
+        end_pose.orientation.y = q3.y();
+        end_pose.orientation.z = q3.z();
+        end_pose.orientation.w = q3.w();
+    }
+
+
 	rapp::object::pose getRobotPoseFromQRcodeMap(rapp::object::qr_code_3d QRcodes,std::vector<std::vector<float>> camera_to_robot_matrix, rapp::object::qr_code_map QRmap){
 		rapp::object::pose robot_in_map_pose_RAPP;
 
