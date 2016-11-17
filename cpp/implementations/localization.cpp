@@ -28,7 +28,40 @@ namespace robot {
 {
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
-	void localization::multiplyPoses(rapp::object::pose &pose1, rapp::object::pose &pose2, rapp::object::pose &end_pose)
+
+	rapp::object::pose rapp_pose_fromeigen_matrix(Eigen::Matrix4f &eigen_matrix){
+		rapp::object::pose end_pose;
+		Eigen::Matrix3f mat_rot3 = eigen_matrix.block<3,3>(0,0);
+        Eigen::Quaternion<float> q3(mat_rot3);
+        Eigen::Vector4f t3;
+        t3 = eigen_matrix.rightCols<1>();
+        end_pose.position.x = t3(0);
+        end_pose.position.y = t3(1);
+        end_pose.position.z = t3(2);
+        end_pose.orientation.x = q3.x();
+        end_pose.orientation.y = q3.y();
+        end_pose.orientation.z = q3.z();
+        end_pose.orientation.w = q3.w();
+        return end_pose;
+	}
+
+    void localization::pose_from_matrix(std::vector<std::vector<float>> matrix,rapp::object::pose &pose){
+
+	    Eigen::Matrix4f eigen_matrix;
+	    Eigen::Vector4f eigen_vector;
+		for (int i = 0; i < 4; i++){
+			for (int k = 0; k < 4; k++){
+				eigen_vector = Eigen::Vector4f::Map(&matrix[k][0],k);
+	 		}
+	 		eigen_matrix.row(i) = eigen_vector;
+
+	}
+	    pose = rapp_pose_fromeigen_matrix(eigen_matrix);
+
+    }
+
+
+	void localization::multiply_poses(rapp::object::pose &pose1, rapp::object::pose &pose2, rapp::object::pose &end_pose)
     {
         Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");
         Eigen::Matrix4f Trans1;
