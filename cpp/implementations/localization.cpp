@@ -29,6 +29,37 @@ namespace robot {
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
 
+    rapp::object::quaternion localization::quaternion_from_euler(float roll, float pitch, float yaw){
+    	rapp::object::quaternion rapp_quaternion;
+        Eigen::AngleAxisf rollAngle((roll*M_PI) / 180, Eigen::Vector3f::UnitX());
+        Eigen::AngleAxisf yawAngle((yaw*M_PI) / 180, Eigen::Vector3f::UnitZ());
+        Eigen::AngleAxisf pitchAngle((pitch*M_PI) / 180, Eigen::Vector3f::UnitY());
+
+        Eigen::Quaternionf q_eigen = yawAngle *  pitchAngle * rollAngle;
+        
+        rapp_quaternion.x = q_eigen.x();
+        rapp_quaternion.y = q_eigen.y();
+        rapp_quaternion.z = q_eigen.z();
+        rapp_quaternion.w = q_eigen.w();
+
+        return rapp_quaternion;
+
+    }
+    
+    std::vector<float> localization::euler_from_quaternion(rapp::object::quaternion &rapp_quaternion){
+
+        Eigen::Quaternionf q_eigen(rapp_quaternion.w,rapp_quaternion.x,rapp_quaternion.y,rapp_quaternion.z);
+
+		Eigen::Vector3f euler_eigen = q_eigen.toRotationMatrix().eulerAngles(2, 1, 0);
+		//yaw = euler[0]; pitch = euler[1]; roll = euler[2];
+		static const float arr[] = {euler_eigen[2],euler_eigen[1],euler_eigen[0]};
+    	std::vector<float> euler(arr, arr + sizeof(arr) / sizeof(arr[0]) );
+    	return euler;
+
+    }
+
+
+
 	rapp::object::pose rapp_pose_fromeigen_matrix(Eigen::Matrix4f &eigen_matrix){
 		rapp::object::pose end_pose;
 		Eigen::Matrix3f mat_rot3 = eigen_matrix.block<3,3>(0,0);
