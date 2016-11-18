@@ -1,17 +1,17 @@
 #ifndef RAPP_DYNAMIC_LOCALIZATION
 #define RAPP_DYNAMIC_LOCALIZATION
 #include "includes.ihh"
+
+namespace rapp {
+namespace robot {
+
 /**
- * @class Localization
+ * @class localization
  * @brief Class which defines the interface for Robot localization capabilities
  * @date 10-August-2015
  * @author Wojciech Dudek <wojciechsbox@gmail.com>
  * @note This class uses pimpl pattern to make ABI as stable as possible when deploying new library versions
  */
-
-namespace rapp {
-namespace robot {
-
 class localization
 {
   public:

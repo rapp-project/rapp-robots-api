@@ -1,19 +1,19 @@
 #ifndef RAPP_ROBOT_NAVIGATION
 #define RAPP_ROBOT_NAVIGATION
 #include "includes.ihh"
-/**
- * @class Navigation
- * @brief Class which defines the interface for Robot navigation capabilities (movement, localization)
- * @date 10-August-2015
- * @author Wojciech Dudek <wojciechsbox@gmail.com>
- * @note This class uses pimpl pattern to make ABI as stable as possible when deploying new library versions
- */
 
 namespace rapp {
 namespace robot {
 
 class NavigationImpl;
 
+/**
+ * @class navigation
+ * @brief Class which defines the interface for Robot navigation capabilities (movement, localization)
+ * @date 10-August-2015
+ * @author Wojciech Dudek <wojciechsbox@gmail.com>
+ * @note This class uses pimpl pattern to make ABI as stable as possible when deploying new library versions
+ */
 class navigation
 {
   public:
@@ -23,11 +23,13 @@ class navigation
      * Create navigation module. Implementation object (pimpl) should be created here.
      */
     navigation(int argc=0, char ** argv = NULL);
+    
     /**
      * Destroy navigation module. Implementation object should be destroyed here.
      */
     ~navigation();
-        /**
+    
+    /**
      * point_arm - move NAO arm to point its fingers to the reqested point given in the global coordinate frame.
      *
      * @param x - X coordination of the requested point.
@@ -39,7 +41,7 @@ class navigation
     // This is a BLOCKING CALL.
     bool point_arm(float x, float y, float z);
 
-        /**
+    /**
      * moveTo - initiate move to specified point given by (x,y,theta) coordinates, with respect to current NAO coordination frame.
      *
      * @param x - X coordination of the goal point.
@@ -50,18 +52,28 @@ class navigation
      */
     // This is a BLOCKING CALL.
     bool move_to(float x, float y, float theta);
+    
     /**
-     * moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta.
+     * moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta. 
+     * This version works with holonomic robots (like NAO)
      *
-     * @param x - velocity along NAO X axis.
-     * @param y - velocity along NAO Y axis.
-     * @param theta - velocity around NAO Z axis.
+     * @param x - velocity along robots X axis.
+     * @param y - velocity along robots Y axis.
+     * @param theta - velocity around robots Z axis.
      *
      * @return call status (false - Failed, true - Success)
      */
-    // this is NOT a BLOCKING CALL.
     bool move_vel(float x, float y, float theta);
-    // version for non-holonomic
+    
+    /**
+     * moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta.
+     * This version works for non-holonimic robots (e.g. differential drive)
+     *
+     * @param x - velocity along robots X axis.
+     * @param theta - velocity around robots Z axis.
+     *
+     * @return call status (false - Failed, true - Success)
+     */
     bool move_vel(float x, float theta);
 
     /**

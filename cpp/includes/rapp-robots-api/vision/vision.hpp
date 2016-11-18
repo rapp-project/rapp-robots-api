@@ -23,28 +23,30 @@ public:
      */
     struct camera_info {
         /// camera matrix
-	std::vector<float> K;
-	/// distortion coeffs
-	std::vector<float> D;
-	/// projection matrix
-	std::vector<float> P;
+        std::vector<float> K;
+        /// distortion coeffs
+        std::vector<float> D;
+        /// projection matrix
+        std::vector<float> P;
     };
 
-     enum camera_params {
-          brightness = 0,
-          contrast = 1,
-          gain = 6,
-          auto_exposure = 11,
-          auto_white_balance = 12,
-          exposure = 17
-     };
-     
-     enum camera_resolution {
-          qqvga = 0,
-          qvga = 1,
-          vga = 2,
-          vga4 = 3
-     };
+    /// Camera parameters
+    enum camera_params {
+        brightness = 0,
+        contrast = 1,
+        gain = 6,
+        auto_exposure = 11,
+        auto_white_balance = 12,
+        exposure = 17
+    };
+    
+    /// Camera resolution
+    enum camera_resolution {
+        qqvga = 0,
+        qvga = 1,
+        vga = 2,
+        vga4 = 3
+    };
 
     /**
      * Create vision module. Implementation object (pimpl) should be created here.

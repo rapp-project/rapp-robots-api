@@ -50,7 +50,7 @@ public:
      * Say given sentence in selected language
      * 
      * \param str message which will be spoken
-     * \param lanugage flag of the language in which the message is given
+     * \param language flag of the language in which the message is given
      * 
      * \return 
      */
