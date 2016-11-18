@@ -1,36 +1,6 @@
 rapp::robot::info class Reference
 =================================
 
-#### Private Attributes
-
--   std::string base\_path\_
-
-    *Base path.*
-
--   [info](#classrapp_1_1robot_1_1info_1a5e3f46a38e36600addacabbb8e9af829) ( int argc, char \* argv)
-
-<!-- -->
-
--   [info](#classrapp_1_1robot_1_1info_1aed2e1a70d20f64bbfda9fd35b3e4e1b7) ( const [info](#classrapp_1_1robot_1_1info) & rhs)
-
-<!-- -->
-
--   const std::string & [base\_path](#classrapp_1_1robot_1_1info_1a30c45439de36d4d3187d7d7ae21c528a) ( )
-
-<!-- -->
-
--   std::string [get\_path](#classrapp_1_1robot_1_1info_1ad657d8eae976052591dba213d4820795) ( const std::string & relative\_path)
-
--   [info](#classrapp_1_1robot_1_1info_1ae2bfeea89bac81a9647888593032ace1) ( )
-
-Utility class keeping global information about robot.
-
-Definition at line 12 of file info.hpp
-
-The Documentation for this struct was generated from the following file:
-
--   info.hpp
-
 #### Member Data Documentation
 
 #### rapp::robot::info::info (int argc, char \*argv\[\])

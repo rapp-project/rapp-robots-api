@@ -1,79 +1,9 @@
 rapp::robot::vision class Reference
 ===================================
 
-#### Classes
-
--   struct [rapp::robot::vision::camera\_info](#structrapp_1_1robot_1_1vision_1_1camera__info)
-
--   enum [camera\_params](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7) { [brightness](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7ac3d28a7c31d7119b902f13230963bcfa)= 0, [contrast](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7a635e7ca0a51cc711d3e4d9371cd587e9)= 1, [gain](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7aa5b5ffe37852aaf650b3072c40fe7567)= 6, [auto\_exposure](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7a823740f84e71addaa8573e0940f97705)= 11, [auto\_white\_balance](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7a7d262bf9fe9dfa996cfb8595b930bb16)= 12, [exposure](#classrapp_1_1robot_1_1vision_1afc0b42a3dae9b13e241313e082a89ee7a667e9ce517a4d3eeda83027b50b7d5d1)= 17 }
-
-    *Camera parameters.*
-
-<!-- -->
-
--   enum [camera\_resolution](#classrapp_1_1robot_1_1vision_1a4be2c8c9300958a33bed05b459140fd2) { [qqvga](#classrapp_1_1robot_1_1vision_1a4be2c8c9300958a33bed05b459140fd2a770f3ea726fdbcc7f955eb5ca3f124a5)= 0, [qvga](#classrapp_1_1robot_1_1vision_1a4be2c8c9300958a33bed05b459140fd2aaac4534552eb91762548d637138da71f)= 1, [vga](#classrapp_1_1robot_1_1vision_1a4be2c8c9300958a33bed05b459140fd2adafbdf865accf4d8c0ab524d8d06c4bd)= 2, [vga4](#classrapp_1_1robot_1_1vision_1a4be2c8c9300958a33bed05b459140fd2afa84d160fc0ab01a99aa4f39ea484e23)= 3 }
-
-    *Camera resolution.*
-
-#### Private Attributes
-
--   VisionImpl \* pimpl
-
--   [vision](#classrapp_1_1robot_1_1vision_1ab8245d2b51b78fc2191c70445b957de2) ( int argc, char \* argv)
-
-<!-- -->
-
--   [~vision](#classrapp_1_1robot_1_1vision_1a25da68838b073e853b969881e84797f5) ( )
-
-<!-- -->
-
--   rapp::object::picture::Ptr [capture\_image](#classrapp_1_1robot_1_1vision_1ac7782beca4726d7331ed842430539177) ( int camera\_id, int camera\_resolution, const std::string & encoding)
-
-<!-- -->
-
--   bool [set\_camera\_param](#classrapp_1_1robot_1_1vision_1a7a9d77d28e6d783e4c516f5761bccbda) ( int camera\_id, int parameter\_id, int new\_value)
-
-<!-- -->
-
--   std::map&lt; int, bool &gt; [set\_camera\_params](#classrapp_1_1robot_1_1vision_1a48532e792b5b7238f3d5ca2388236809) ( int camera\_id, const std::map&lt; int, int &gt; & params)
-
-<!-- -->
-
--   std::vector&lt; std::vector&lt; float &gt; &gt; [face\_detect](#classrapp_1_1robot_1_1vision_1acfbe0a5de02df83f01a693e3defb15d6) ( rapp::object::picture image, int camera\_id, int camera\_resolution)
-
-<!-- -->
-
--   rapp::object::qr\_code\_3d [qr\_code\_detection](#classrapp_1_1robot_1_1vision_1a69686bb466264298e39f08bf1362a39a) ( rapp::object::picture::Ptr image, std::vector&lt; std::vector&lt; float &gt;&gt; robot\_to\_camera\_matrix, double camera\_matrix, float landmark\_theoretical\_size)
-
-<!-- -->
-
--   [camera\_info](#structrapp_1_1robot_1_1vision_1_1camera__info) [load\_camera\_info](#classrapp_1_1robot_1_1vision_1a7b5d6368f98412dc380c92e22b5c7fc4) ( int camera\_id)
-
-<!-- -->
-
--   void [save\_camera\_info](#classrapp_1_1robot_1_1vision_1a85f1c9d384341706e7e356aa86589b86) ( int camera\_id, [camera\_info](#structrapp_1_1robot_1_1vision_1_1camera__info) info)
-
-Interface class for robot vision module.
-
-**Version:.**
-
-1
-
-**Date:.**
-
-20-September-2015
-
-**Author:.**
-
-Maciej Stefańczyk <m.stefanczyk@elka.pw.edu.pl>
-
-Definition at line 19 of file vision.hpp
-
-The Documentation for this struct was generated from the following file:
-
--   vision.hpp
-
 #### enum camera\_params
+
+Camera parameters
 
 **Enumerator:.**
 
@@ -89,7 +19,7 @@ auto\_white\_balance
 
 exposure  
 
-Definition at line 34 of file vision.hpp `
+Definition at line 36 of file vision.hpp `
 {
 brightness= 0, 
 contrast= 1, 
@@ -102,6 +32,8 @@ exposure= 17,
 
 #### enum camera\_resolution
 
+Camera resolution
+
 **Enumerator:.**
 
 qqvga  
@@ -112,7 +44,7 @@ vga
 
 vga4  
 
-Definition at line 44 of file vision.hpp `
+Definition at line 48 of file vision.hpp `
 {
 qqvga= 0, 
 qvga= 1, 
@@ -129,7 +61,7 @@ Pointer to implementation class.
 
 Cheshire Cat (pimpl) programming pattern
 
-Definition at line 141 of file vision.hpp
+Definition at line 145 of file vision.hpp
 
 The Documentation for this struct was generated from the following file:
 
@@ -139,7 +71,7 @@ The Documentation for this struct was generated from the following file:
 
 Create vision module. Implementation object (pimpl) should be created here.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -167,7 +99,7 @@ Destroy vision module. Implementation object should be destroyed here.
 
 Capture an image frame from the robot’s camera.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -199,7 +131,7 @@ captured image as raw byte stream
 
 Set camera parameter.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -231,7 +163,7 @@ true on success, false otherwise
 
 Set multiple camera parameters at once.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -259,7 +191,7 @@ success flag for each parameter
 
 Detects faces.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -291,7 +223,7 @@ vector of informations about the detected face
 
 Detects QR-codes.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -327,7 +259,7 @@ QR-codes informations
 
 Load camera calibration info for selected camera. If no calibration data is present, default values are returned.
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -347,7 +279,7 @@ Load camera calibration info for selected camera. If no calibration data is pres
 
 Save camera info for selected camera in persistend storage
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>

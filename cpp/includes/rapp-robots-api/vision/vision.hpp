@@ -30,7 +30,9 @@ public:
         std::vector<float> P;
     };
 
-    /// Camera parameters
+    /**
+     * Camera parameters
+     */
     enum camera_params {
         brightness = 0,
         contrast = 1,
@@ -40,7 +42,9 @@ public:
         exposure = 17
     };
     
-    /// Camera resolution
+    /**
+     * Camera resolution
+     */
     enum camera_resolution {
         qqvga = 0,
         qvga = 1,

@@ -1,64 +1,6 @@
 rapp::robot::communication class Reference
 ==========================================
 
-#### Private Attributes
-
--   CommunicationImpl \* pimpl
-
--   [communication](#classrapp_1_1robot_1_1communication_1a7d7dfff1c4e937c5d7533c9fc2a6b10f) ( int argc, char \* argv)
-
-<!-- -->
-
--   [~communication](#classrapp_1_1robot_1_1communication_1a058277d8b280b5b8e6354a0f1c4d274d) ( )
-
-<!-- -->
-
--   bool [play\_audio](#classrapp_1_1robot_1_1communication_1a3ac78a92ba140819ccf4d68e4a63e82d) ( const std::string & file\_path, double position, double volume, double balance, bool play\_in\_loop)
-
-<!-- -->
-
--   bool [text\_to\_speech](#classrapp_1_1robot_1_1communication_1a437818af851c59b0b91e1f60d57a4ab4) ( const std::string & str, [Language](#classrapp_1_1robot_1_1communication_1aa68950f71c5f18df6816725b50c3c62e) language)
-
-<!-- -->
-
--   std::string [word\_spotting](#classrapp_1_1robot_1_1communication_1a31eded62fe44c2ca36a15fd4f116215e) ( const std::vector&lt; std::string &gt; & dictionary)
-
-<!-- -->
-
--   std::string [capture\_audio](#classrapp_1_1robot_1_1communication_1a357f732e88ebb692a43b0e11577e8e99) ( int time)
-
-<!-- -->
-
--   std::string [capture\_audio](#classrapp_1_1robot_1_1communication_1a00360013bf4487ab92eb6543c1325615) ( std::string & file\_path, float waiting\_time, int microphone\_energy)
-
-<!-- -->
-
--   int [microphone\_energy](#classrapp_1_1robot_1_1communication_1a201a99034d36e19b325a34b764cdb651) ( std::string & name)
-
-<!-- -->
-
--   void [voice\_record](#classrapp_1_1robot_1_1communication_1a3e7ed35ec0bd788f28b824ecb71490f0) ( bool start, std::vector&lt; std::vector&lt; unsigned char &gt; &gt; & buffer)
-
-Interface class for robot communication module.
-
-**Version:.**
-
-1
-
-**Date:.**
-
-20-September-2015
-
-**Author:.**
-
-Maksym Figat <m.figat@ia.pw.edu.pl>
-
-Definition at line 18 of file communication.hpp
-
-The Documentation for this struct was generated from the following file:
-
--   communication.hpp
-
 #### enum Language
 
 Language for text-to-speech module
@@ -90,7 +32,7 @@ Destroy communication module. Implementation object should be destroyed here.
 
 Produce Audio from robot's speakers
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -128,7 +70,7 @@ Produce Audio from robot's speakers
 
 Say given sentence in selected language
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -154,7 +96,7 @@ Say given sentence in selected language
 
 Recognize the word included in the database
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -180,7 +122,7 @@ use vector&lt;string&gt; instead of string\[\]
 
 Record the audio message from the microphones by the desired time
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -202,7 +144,7 @@ Record the audio message from the microphones by the desired time
 
 Record the audio message with silence detection
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -230,7 +172,7 @@ Record the audio message with silence detection
 
 Return signal energy of the selected microphone
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
@@ -252,7 +194,7 @@ Return signal energy of the selected microphone
 
 Record the audio message to the buffer
 
-**.**
+
 
 <table>
 <caption>Parameters</caption>
