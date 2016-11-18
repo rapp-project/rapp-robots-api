@@ -46,17 +46,24 @@ namespace robot {
 	}
 
     void localization::pose_from_matrix(std::vector<std::vector<float>> matrix,rapp::object::pose &pose){
-
+//Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");
 	    Eigen::Matrix4f eigen_matrix;
 	    Eigen::Vector4f eigen_vector;
+
 		for (int i = 0; i < 4; i++){
+			
+// 			eigen_vector(0) = matrix[0];
 			for (int k = 0; k < 4; k++){
-				eigen_vector = Eigen::Vector4f::Map(&matrix[k][0],k);
+//				eigen_vector = Eigen::Vector4f::Map(&matrix[k][0],k);
+                        	eigen_vector(k) = matrix[i][k];
+
 	 		}
 	 		eigen_matrix.row(i) = eigen_vector;
 
-	}
-	    pose = rapp_pose_fromeigen_matrix(eigen_matrix);
+		}
+       		//std::cout << "eigen_matrix: \n"<<eigen_matrix.format(OctaveFmt) << std::endl;
+
+	    	pose = rapp_pose_fromeigen_matrix(eigen_matrix);
 
     }
 
