@@ -29,6 +29,38 @@ namespace robot {
     std::cout << "Finished placeholder rapp::robot::navigation library" << std::endl;
 }
 
+	std::vector<std::vector<float>> localization::invert_transform(std::vector<std::vector<float>> matrix_input){
+
+	    Eigen::Matrix4f eigen_matrix;
+	    Eigen::Matrix4f eigen_matrix_inv;
+	    Eigen::Vector4f eigen_vector;
+
+	    std::vector<std::vector<float>> matrix_out(4, std::vector<float>(4));
+		for (int i = 0; i < 4; i++){
+			
+// 			eigen_vector(0) = matrix[0];
+			for (int k = 0; k < 4; k++){
+//				eigen_vector = Eigen::Vector4f::Map(&matrix[k][0],k);
+                        	eigen_vector(k) = matrix_input[i][k];
+
+	 		}
+	 		eigen_matrix.row(i) = eigen_vector;
+
+		}
+		eigen_matrix_inv = eigen_matrix.inverse();
+
+		for (int i = 0; i < 4; i++){
+			eigen_vector = eigen_matrix_inv.row(i);
+// 			eigen_vector(0) = matrix[0];
+			for (int k = 0; k < 4; k++){
+//				eigen_vector = Eigen::Vector4f::Map(&matrix[k][0],k);
+                        	matrix_out[i][k] = eigen_vector(k);
+
+	 		}
+		}
+
+		return matrix_out;
+	}
     rapp::object::quaternion localization::quaternion_from_euler(float roll, float pitch, float yaw){
     	rapp::object::quaternion rapp_quaternion;
         Eigen::AngleAxisf rollAngle((roll*M_PI) / 180, Eigen::Vector3f::UnitX());
@@ -76,7 +108,7 @@ namespace robot {
         return end_pose;
 	}
 
-    void localization::pose_from_matrix(std::vector<std::vector<float>> matrix,rapp::object::pose &pose){
+    void localization::pose_from_matrix(std::vector<std::vector<float>> &matrix,rapp::object::pose &pose){
 //Eigen::IOFormat OctaveFmt(Eigen::StreamPrecision, 0, ", ", ";\n", "", "", "[", "]");
 	    Eigen::Matrix4f eigen_matrix;
 	    Eigen::Vector4f eigen_vector;
