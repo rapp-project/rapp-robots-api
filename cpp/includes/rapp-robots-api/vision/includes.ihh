@@ -1,0 +1,7 @@
+#include <map>
+#include <string>
+#include <vector>
+
+#include "rapp/objects/picture/picture.hpp"
+#include "rapp/objects/qr_code_3d/qr_code_3d.hpp"
+

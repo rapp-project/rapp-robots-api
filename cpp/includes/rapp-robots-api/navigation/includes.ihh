@@ -1,0 +1,7 @@
+#include <string>
+#include <vector>
+#include <rapp/objects/pose/pose.hpp>
+
+#include <rapp/objects/pose_stamped/pose_stamped.hpp>
+#include <rapp/objects/qr_code_map/qr_code_map.hpp>
+

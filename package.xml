@@ -1,0 +1,12 @@
+<package format="2">
+  <name>rapp-robots-api</name>
+  <version>0.2.0</version>
+  <description>rapp-robots-api
+  </description>
+  <maintainer email="ivana@osrf.org">Ivana Bildbotz</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>rapp-api</build_depend>
+</package>
