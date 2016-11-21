@@ -13,7 +13,7 @@ do
     dd="$(tr '[:lower:]' '[:upper:]' <<< ${d:0:1})${d:1}"
     dd=${dd::-1}
     cd $d
-    echo -e "$dd module\n\n"
+#    echo -e "$dd module\n\n"
     cat README.md
     cd ..
 done

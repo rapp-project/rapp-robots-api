@@ -1,4 +1,4 @@
-rapp::robot::vision class Reference
+vision class Reference
 ===================================
 
 #### enum camera\_params
@@ -67,7 +67,7 @@ The Documentation for this struct was generated from the following file:
 
 -   vision.hpp
 
-#### rapp::robot::vision::vision (int argc=0, char \*argv\[\]=NULL)
+#### vision::vision (int argc=0, char \*argv\[\]=NULL)
 
 Create vision module. Implementation object (pimpl) should be created here.
 
@@ -91,11 +91,11 @@ Create vision module. Implementation object (pimpl) should be created here.
 </tbody>
 </table>
 
-#### rapp::robot::vision::~vision ()
+#### vision::~vision ()
 
 Destroy vision module. Implementation object should be destroyed here.
 
-#### rapp::object::picture::Ptr rapp::robot::vision::capture\_image (int camera\_id, int camera\_resolution, const std::string &encoding)
+#### rapp::object::picture::Ptr vision::capture\_image (int camera\_id, int camera\_resolution, const std::string &encoding)
 
 Capture an image frame from the robot’s camera.
 
@@ -127,7 +127,7 @@ Capture an image frame from the robot’s camera.
 
 captured image as raw byte stream
 
-#### bool rapp::robot::vision::set\_camera\_param (int camera\_id, int parameter\_id, int new\_value)
+#### bool vision::set\_camera\_param (int camera\_id, int parameter\_id, int new\_value)
 
 Set camera parameter.
 
@@ -159,7 +159,7 @@ Set camera parameter.
 
 true on success, false otherwise
 
-#### std::map&lt;int, bool&gt; rapp::robot::vision::set\_camera\_params (int camera\_id, const std::map&lt; int, int &gt; &params)
+#### std::map&lt;int, bool&gt; vision::set\_camera\_params (int camera\_id, const std::map&lt; int, int &gt; &params)
 
 Set multiple camera parameters at once.
 
@@ -187,7 +187,7 @@ Set multiple camera parameters at once.
 
 success flag for each parameter
 
-#### std::vector&lt; std::vector &lt;float&gt; &gt; rapp::robot::vision::face\_detect (rapp::object::picture image, int camera\_id, int camera\_resolution)
+#### std::vector&lt; std::vector &lt;float&gt; &gt; vision::face\_detect (rapp::object::picture image, int camera\_id, int camera\_resolution)
 
 Detects faces.
 
@@ -219,7 +219,7 @@ Detects faces.
 
 vector of informations about the detected face
 
-#### rapp::object::qr\_code\_3d rapp::robot::vision::qr\_code\_detection (rapp::object::picture::Ptr image, std::vector&lt; std::vector&lt; float &gt;&gt; robot\_to\_camera\_matrix, double camera\_matrix\[\]\[3\], float landmark\_theoretical\_size=0.16f)
+#### rapp::object::qr\_code\_3d vision::qr\_code\_detection (rapp::object::picture::Ptr image, std::vector&lt; std::vector&lt; float &gt;&gt; robot\_to\_camera\_matrix, double camera\_matrix\[\]\[3\], float landmark\_theoretical\_size=0.16f)
 
 Detects QR-codes.
 
@@ -255,7 +255,7 @@ Detects QR-codes.
 
 QR-codes informations
 
-#### camera\_info rapp::robot::vision::load\_camera\_info (int camera\_id)
+#### camera\_info vision::load\_camera\_info (int camera\_id)
 
 Load camera calibration info for selected camera. If no calibration data is present, default values are returned.
 
@@ -275,7 +275,7 @@ Load camera calibration info for selected camera. If no calibration data is pres
 </tbody>
 </table>
 
-#### void rapp::robot::vision::save\_camera\_info (int camera\_id, camera\_info info)
+#### void vision::save\_camera\_info (int camera\_id, camera\_info info)
 
 Save camera info for selected camera in persistend storage
 

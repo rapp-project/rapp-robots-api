@@ -15,6 +15,7 @@ do
     | sed 's/\r\([^\r]*\)\r------*/\r#### \1/g' \
     | perl -pe 's|=====\r(.*?)####|=====\r\r####|g' \
     | tr '\r' '\n' \
+    | sed 's/rapp::robot:://g' \
     | sed 's/\*\*\.\*\*//g' \
     > ${clsn}.md
 #    | sed 's/^|---|---|$/\n| Argument | Description |\n|---|---|/g' \

@@ -1,4 +1,4 @@
-rapp::robot::communication class Reference
+communication class Reference
 ==========================================
 
 #### enum Language
@@ -20,15 +20,15 @@ GREEK,
 
 #### Member Data Documentation
 
-#### rapp::robot::communication::communication (int argc, char \*argv\[\])
+#### communication::communication (int argc, char \*argv\[\])
 
 Create communication module. Implementation object (pimpl) should be created here.
 
-#### rapp::robot::communication::~communication ()
+#### communication::~communication ()
 
 Destroy communication module. Implementation object should be destroyed here.
 
-#### bool rapp::robot::communication::play\_audio (const std::string &file\_path, double position=0, double volume=1, double balance=0, bool play\_in\_loop=false)
+#### bool communication::play\_audio (const std::string &file\_path, double position=0, double volume=1, double balance=0, bool play\_in\_loop=false)
 
 Produce Audio from robot's speakers
 
@@ -66,7 +66,7 @@ Produce Audio from robot's speakers
 
 **Returns:.**
 
-#### bool rapp::robot::communication::text\_to\_speech (const std::string &str, Language language=Language::ENGLISH)
+#### bool communication::text\_to\_speech (const std::string &str, Language language=Language::ENGLISH)
 
 Say given sentence in selected language
 
@@ -92,7 +92,7 @@ Say given sentence in selected language
 
 **Returns:.**
 
-#### std::string rapp::robot::communication::word\_spotting (const std::vector&lt; std::string &gt; &dictionary)
+#### std::string communication::word\_spotting (const std::vector&lt; std::string &gt; &dictionary)
 
 Recognize the word included in the database
 
@@ -118,7 +118,7 @@ Recognize the word included in the database
 
 use vector&lt;string&gt; instead of string\[\]
 
-#### std::string rapp::robot::communication::capture\_audio (int time)
+#### std::string communication::capture\_audio (int time)
 
 Record the audio message from the microphones by the desired time
 
@@ -140,7 +140,7 @@ Record the audio message from the microphones by the desired time
 
 **Returns:.**
 
-#### std::string rapp::robot::communication::capture\_audio (std::string &file\_path, float waiting\_time, int microphone\_energy)
+#### std::string communication::capture\_audio (std::string &file\_path, float waiting\_time, int microphone\_energy)
 
 Record the audio message with silence detection
 
@@ -168,7 +168,7 @@ Record the audio message with silence detection
 </tbody>
 </table>
 
-#### int rapp::robot::communication::microphone\_energy (std::string &name)
+#### int communication::microphone\_energy (std::string &name)
 
 Return signal energy of the selected microphone
 
@@ -190,7 +190,7 @@ Return signal energy of the selected microphone
 
 **Returns:.**
 
-#### void rapp::robot::communication::voice\_record (bool start, std::vector&lt; std::vector&lt; unsigned char &gt; &gt; &buffer)
+#### void communication::voice\_record (bool start, std::vector&lt; std::vector&lt; unsigned char &gt; &gt; &buffer)
 
 Record the audio message to the buffer
 

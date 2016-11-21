@@ -1,17 +1,17 @@
-rapp::robot::navigation class Reference
+navigation class Reference
 =======================================
 
 #### Member Data Documentation
 
-#### rapp::robot::navigation::navigation (int argc=0, char \*\*argv=NULL)
+#### navigation::navigation (int argc=0, char \*\*argv=NULL)
 
 Create navigation module. Implementation object (pimpl) should be created here.
 
-#### rapp::robot::navigation::~navigation ()
+#### navigation::~navigation ()
 
 Destroy navigation module. Implementation object should be destroyed here.
 
-#### bool rapp::robot::navigation::point\_arm (float x, float y, float z)
+#### bool navigation::point\_arm (float x, float y, float z)
 
 point\_arm - move NAO arm to point its fingers to the reqested point given in the global coordinate frame.
 
@@ -43,7 +43,7 @@ point\_arm - move NAO arm to point its fingers to the reqested point given in th
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_to (float x, float y, float theta)
+#### bool navigation::move\_to (float x, float y, float theta)
 
 moveTo - initiate move to specified point given by (x,y,theta) coordinates, with respect to current NAO coordination frame.
 
@@ -75,7 +75,7 @@ moveTo - initiate move to specified point given by (x,y,theta) coordinates, with
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_vel (float x, float y, float theta)
+#### bool navigation::move\_vel (float x, float y, float theta)
 
 moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta. This version works with holonomic robots (like NAO)
 
@@ -107,7 +107,7 @@ moveVel - initiate move with the specified linear velocities in x, y axis direct
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_vel (float x, float theta)
+#### bool navigation::move\_vel (float x, float theta)
 
 moveVel - initiate move with the specified linear velocities in x, y axis direction and angular velocity theta. This version works for non-holonimic robots (e.g. differential drive)
 
@@ -135,7 +135,7 @@ moveVel - initiate move with the specified linear velocities in x, y axis direct
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_stop ()
+#### bool navigation::move\_stop ()
 
 moveStop - Stop robot movement - movement initiated by moveTo, moveVel and moveAlongPath methods.
 
@@ -143,7 +143,7 @@ moveStop - Stop robot movement - movement initiated by moveTo, moveVel and moveA
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_joint (std::vector&lt; std::string &gt; joint, std::vector&lt; float &gt; angle, float speed)
+#### bool navigation::move\_joint (std::vector&lt; std::string &gt; joint, std::vector&lt; float &gt; angle, float speed)
 
 moveJoint - move given joints/given chain to specified angle with specified maximum joints speed fraction.
 
@@ -189,9 +189,9 @@ Avaliable joints and chains are as follows:
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_joint (std::vector&lt; std::string &gt; joint, std::vector&lt; float &gt; angle)
+#### bool navigation::move\_joint (std::vector&lt; std::string &gt; joint, std::vector&lt; float &gt; angle)
 
-#### bool rapp::robot::navigation::take\_predefined\_posture (std::string posture, float speed)
+#### bool navigation::take\_predefined\_posture (std::string posture, float speed)
 
 takePredefinedPosture - Take predefined robot posture.
 
@@ -219,7 +219,7 @@ takePredefinedPosture - Take predefined robot posture.
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::look\_at\_point (float x, float y, float z)
+#### bool navigation::look\_at\_point (float x, float y, float z)
 
 lookAtPoint - Move robot to point it's main camera to a given point (x,y,z).
 
@@ -251,7 +251,7 @@ lookAtPoint - Move robot to point it's main camera to a given point (x,y,z).
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::rest (std::string posture)
+#### bool navigation::rest (std::string posture)
 
 rest - take given safe posture and remove motors stiffness. If the given posture is not safe - returns False.
 
@@ -275,7 +275,7 @@ rest - take given safe posture and remove motors stiffness. If the given posture
 
 call status (false - Failed, true - Success)
 
-#### bool rapp::robot::navigation::move\_along\_path (std::vector&lt; rapp::object::pose\_stamped &gt; poses)
+#### bool navigation::move\_along\_path (std::vector&lt; rapp::object::pose\_stamped &gt; poses)
 
 moveAlongPath - move robot along the given path. It moves with standard velocity, untill the end is reached or any obstacle was met.
 
@@ -299,7 +299,7 @@ moveAlongPath - move robot along the given path. It moves with standard velocity
 
 call status (false - Failed, true - Success)
 
-#### rapp::object::pose\_stamped rapp::robot::navigation::get\_global\_pose ()
+#### rapp::object::pose\_stamped navigation::get\_global\_pose ()
 
 getRobotPose - returns robot pose given in the global frame.
 
@@ -307,7 +307,7 @@ getRobotPose - returns robot pose given in the global frame.
 
 current robot pose in the global frame.
 
-#### bool rapp::robot::navigation::set\_global\_pose (rapp::object::pose rapp\_pose)
+#### bool navigation::set\_global\_pose (rapp::object::pose rapp\_pose)
 
 setGlobalPose - sets new robot pose in the global frame. Usually is used to set new robots pose that was estimated by one of global localization methods (e.g. QR-localization).
 
@@ -315,7 +315,7 @@ setGlobalPose - sets new robot pose in the global frame. Usually is used to set 
 
 call status (false - Failed, true - Success)
 
-#### std::vector&lt;std::vector&lt;float&gt; &gt; rapp::robot::navigation::get\_transform (std::string chainName, int space)
+#### std::vector&lt;std::vector&lt;float&gt; &gt; navigation::get\_transform (std::string chainName, int space)
 
 getTransform - return homogeneous transformation matrix of given chain in the given space.
 
