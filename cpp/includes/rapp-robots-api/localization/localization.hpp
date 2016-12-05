@@ -51,7 +51,7 @@ class localization
      * @return std::vector<float> - euler angles: [0] - angle around X direction, [1] - angle around Y direction, [2] - angle around Z direction.
      */
     // This is a BLOCKING CALL.
-    std::vector<float> euler_from_quaternion(rapp::object::quaternion &rapp_quaternion);
+ const void euler_from_quaternion(const rapp::object::quaternion &rapp_quaternion, std::array<float, 3> &euler);
     /**
      * pose_from_matrix - convert transformation matrix to the rapp::object::pose object.
      *

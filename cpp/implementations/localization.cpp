@@ -78,16 +78,20 @@ namespace robot {
 
     }
     
-    std::vector<float> localization::euler_from_quaternion(rapp::object::quaternion &rapp_quaternion){
+    const void localization::euler_from_quaternion(const rapp::object::quaternion &rapp_quaternion, std::array<float,3> &euler){
 
         Eigen::Quaternionf q_eigen(rapp_quaternion.w,rapp_quaternion.x,rapp_quaternion.y,rapp_quaternion.z);
 
 		Eigen::Vector3f euler_eigen = q_eigen.toRotationMatrix().eulerAngles(2, 1, 0);
 		//yaw = euler[0]; pitch = euler[1]; roll = euler[2];
-		static const float arr[] = {euler_eigen[2],euler_eigen[1],euler_eigen[0]};
-    	std::vector<float> euler(arr, arr + sizeof(arr) / sizeof(arr[0]) );
-    	return euler;
+		//static const float arr[] = {euler_eigen[2],euler_eigen[1],euler_eigen[0]};
 
+    	euler.at(0) = euler_eigen[2];
+    	euler.at(1) = euler_eigen[1];
+    	euler.at(2) = euler_eigen[0];
+std::cout<<"euler from API_0: "<<euler.at(0)<<std::endl;
+std::cout<<"euler from API_1: "<<euler.at(1)<<std::endl;
+std::cout<<"euler from API_2: "<<euler.at(2)<<std::endl;
     }
 
 
