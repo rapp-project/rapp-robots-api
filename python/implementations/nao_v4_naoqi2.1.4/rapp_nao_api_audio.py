@@ -30,9 +30,21 @@ class DeviceAudio(Audio):
         print text
         return {'error': text}
 
-    def speak(self, text, language='English', animated=False):
+    def speak(self, text, language='English', animated=False, speed=80):
         """
         Call to make NAO dictate a string. English is the default language.
+
+        @type text: str
+        @param text: The text to say
+
+        @type language: str
+        @param language: Language to use for TTS translation
+
+        @type animated: bool
+        @param animated: Enable animated speech
+
+        @type speed: int
+        @param speed: Voice speed. Values in range [0, 200]
 
         """
         if language in ['en', 'En', 'EN']:
@@ -51,15 +63,16 @@ class DeviceAudio(Audio):
             _text = text
         try:
             self.tts.setLanguage(language)
+            self.tts.setParameter("speed", speed)
             if animated:
                 self.tts_animated.say(_text,
                                       {"bodyLanguageMode": "contextual"})
             else:
                 self.tts.say(_text)
         except Exception as e:
-            return self.ret_exc("audio.speak: Unrecognized exception: " + \
-                e.message)
-        
+            return self.ret_exc(
+                "audio.speak: Unrecognized exception: " + e.message)
+
         return {'error': None}
 
     # Call to make NAO start a recording. Supported audio types are wav (1-ch and
