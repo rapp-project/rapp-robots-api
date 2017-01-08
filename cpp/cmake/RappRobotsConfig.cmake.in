@@ -14,3 +14,4 @@ set(RAPP_ROBOTS_LIBRARIES_STATIC @RAPP_STATIC_LIBS@)
 
 set(RAPP_ROBOTS_LIBRARY_DIRS "@CMAKE_INSTALL_PREFIX@/lib")
 
+link_directories(/home/nao/ws_rapp_api/install/lib)
