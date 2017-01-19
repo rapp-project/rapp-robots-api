@@ -16,16 +16,18 @@ namespace robot {
 // placeholder class for vision implementation
 class VisionImpl {
 public:
-    std::string fake_image_;
+    std::vector<std::string> fake_image_;
+    size_t current_id_;
 };
 
 vision::vision(int argc, char * argv[]) : pimpl(NULL) 
 {
     pimpl = new VisionImpl;
+    pimpl->current_id_ = 0;
     std::cout << "Initialized placeholder rapp::robot::vision library" << std::endl;
     po::options_description desc("Allowed options");
     desc.add_options()
-    ("fake_image", po::value<std::string>(), "fake iamge")
+    ("fake_image", po::value<std::vector<std::string> >(&pimpl->fake_image_)->multitoken(), "fake image")
     ;
 
     po::variables_map vm;
@@ -33,12 +35,12 @@ vision::vision(int argc, char * argv[]) : pimpl(NULL)
     po::notify(vm);
 
     if (vm.count("fake_image")) {
-        pimpl->fake_image_ = vm["fake_image"].as<std::string>();
-        std::cout << "Using fake image: " << pimpl->fake_image_ << "\n";
-
-        fs::path p = pimpl->fake_image_;
-        if (!fs::exists(p)) {
-            throw std::runtime_error("rapp::robot::info: base path " + pimpl->fake_image_ + " doesn't exist!");
+        for (auto s: pimpl->fake_image_) {
+            std::cout << "Using fake image: " << s << "\n";
+            fs::path p = s;
+            if (!fs::exists(p)) {
+                throw std::runtime_error("rapp::robot::vision: file " + s + " doesn't exist!");
+            }
         }
     }
 }
@@ -52,9 +54,11 @@ vision::~vision()
 rapp::object::picture::Ptr vision::capture_image (int camera_id, int camera_resolution, const std::string & encoding) 
 {
     std::cout << "vision::captureImage" << std::endl;
-    if (pimpl->fake_image_ != "") {
-        std::cout << "returning " << pimpl->fake_image_ << "\n";
-        auto pic = std::make_shared<rapp::object::picture>(pimpl->fake_image_);
+    if (pimpl->fake_image_.size() > 0) {
+        std::string fname = pimpl->fake_image_[pimpl->current_id_++];
+        if (pimpl->current_id_ >= pimpl->fake_image_.size()) pimpl->current_id_ = 0;
+        std::cout << "returning " << fname << "\n";
+        auto pic = std::make_shared<rapp::object::picture>(fname);
         std::cout << "Type: " << pic->type() << "\n";
         return pic;
     } else {
@@ -82,6 +86,9 @@ rapp::object::qr_code_3d vision::qr_code_detection(rapp::object::picture::Ptr im
 
 vision::camera_info vision::load_camera_info(int camera_id) {
 	vision::camera_info ret;
+    ret.K = {1000, 0, 640, 0, 1000, 480, 0, 0, 1};
+    ret.D = {0, 0, 0, 0, 0};
+    ret.P = ret.K;
 	return ret;
 }
 
