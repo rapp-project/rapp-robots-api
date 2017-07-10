@@ -7,7 +7,7 @@ rh = RappRobot()
 
 # Lower the volume, record an audio and play it back
 rh.audio.setVolume(30)
-[[word, prob], error] = rh.audio.speechDetection(['one', 'two'], 5.0)
+[word, prob, error] = rh.audio.speechDetection(['one', 'two'], 5.0).values()
 if error == None:
     rh.audio.speak("You said " + word + " with a probability of " + \
         str(int(prob * 100)) + " percent")
