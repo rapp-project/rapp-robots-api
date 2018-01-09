@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import time
 
@@ -16,6 +17,8 @@ class DeviceAudio(Audio):
 
         # Intializing NAOQi proxies
         self.tts = ALProxy("ALTextToSpeech", self.nao_ip, self.nao_port)
+        self.tts_animated = ALProxy("ALAnimatedSpeech", self.nao_ip,
+                                    self.nao_port)
         self.audio_rec = ALProxy("ALAudioRecorder", self.nao_ip, self.nao_port)
         self.audio_player = ALProxy("ALAudioPlayer", self.nao_ip, self.nao_port)
         self.audio_device = ALProxy("ALAudioDevice", self.nao_ip, self.nao_port)
@@ -27,23 +30,49 @@ class DeviceAudio(Audio):
         print text
         return {'error': text}
 
-    # Call to make NAO dictate a string. English is the default language.
-    def speak(self, text, language = 'English'):
-        # Sanity conversion
-        _text = str(text)
+    def speak(self, text, language='English', animated=False, speed=80):
+        """
+        Call to make NAO dictate a string. English is the default language.
 
+        @type text: str
+        @param text: The text to say
+
+        @type language: str
+        @param language: Language to use for TTS translation
+
+        @type animated: bool
+        @param animated: Enable animated speech
+
+        @type speed: int
+        @param speed: Voice speed. Values in range [0, 200]
+
+        """
+        if language in ['en', 'En', 'EN']:
+            language = 'English'
+        elif language in ['el', 'gr', 'Gr', 'GR']:
+            language = 'Greek'
         # Check for supported languages
-        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',\
-                'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
+        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',
+                     'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
         if language not in supp_lang:
             return self.ret_exc('audio.speak: Unsupported language')
+        # If text is of type unicode, encode to utf8
+        if isinstance(text, unicode):
+            _text = text.encode('utf8')
+        else:
+            _text = text
         try:
             self.tts.setLanguage(language)
-            self.tts.say(_text)
+            self.tts.setParameter("speed", speed)
+            if animated:
+                self.tts_animated.say(_text,
+                                      {"bodyLanguageMode": "contextual"})
+            else:
+                self.tts.say(_text)
         except Exception as e:
-            return self.ret_exc("audio.speak: Unrecognized exception: " + \
-                e.message)
-        
+            return self.ret_exc(
+                "audio.speak: Unrecognized exception: " + e.message)
+
         return {'error': None}
 
     # Call to make NAO start a recording. Supported audio types are wav (1-ch and
@@ -143,11 +172,11 @@ class DeviceAudio(Audio):
 
         return {'error': None}
 
-    # Performs speech detection with the NAO engine. 
+    # Performs speech detection with the NAO engine.
     # Vocabulary must be a list of strings
     # Since this is an event-based call, it waits 'wait' seconds for input
     # The default language is English
-    def speechDetection(self, vocabulary, wait, language = "English"):
+    def speechDetection(self, vocabulary, wait, language="English"):
 
         # Sanity checks
         if type(vocabulary) is not list:
@@ -157,10 +186,26 @@ class DeviceAudio(Audio):
         if wait <= 0:
             return self.ret_exc('audio.speechDetection: Wait param negative value')
 
+        if language in ['en', 'En', 'EN']:
+            language = 'English'
+        elif language in ['el', 'gr', 'Gr', 'GR']:
+            language = 'Greek'
+        # Check for supported languages
+        supp_lang = ['French', 'Chinese', 'English', 'German', 'Italian',
+                     'Japanese', 'Korean', 'Portuguese', 'Spanish', 'Greek']
+        if language not in supp_lang:
+            return self.ret_exc('audio.speak: Unsupported language')
+
+        _vocabulary = []
+        for idx, w in enumerate(vocabulary):
+            if isinstance(w, unicode):
+                _vocabulary.append(w.encode('utf8'))
+            else:
+                _vocabulary.append(w)
         # Setting language and activating the speech recognition
         try:
             self.speech_recog.setLanguage(language)
-            self.speech_recog.setVocabulary(vocabulary, False)
+            self.speech_recog.setVocabulary(_vocabulary, False)
         except Exception as e:
             return self.ret_exc("audio.speechDetection: Unrecognized exception: " + \
                 e.message)
@@ -179,7 +224,7 @@ class DeviceAudio(Audio):
                 time.sleep(0.1)
                 iterations -= 1
         except Exception as e:
-            
+
             self.speech_recog.unsubscribe("rapp_speech_rec")
             return self.ret_exc('audio.speechDetection: Something wrong with \
                 NAO memory proxy: ' + e.message)
@@ -200,8 +245,7 @@ class DeviceAudio(Audio):
                 from speech recognition: ' + e.message)
 
         return {
-                'error': None,
-                'word': word,
-                'probability': probability
-                }
-
+            'error': None,
+            'word': word,
+            'probability': probability
+        }
